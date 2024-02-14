@@ -10,13 +10,117 @@
   </head>
   <body>
     <header>
-      <h2>Create CV</h2>
+      <h2>Create Resume</h2>
     </header>
     <main>
       <form>
-        <p>Personal Information</p>
+        <div class="personal-information-main">
+          <h3 style="border: 1px solid red">Personal Information</h3>
+          <div class="personal-information">
+            <div class="personal-details" style="border: 1px solid blue">
+              <label for="name" class="name-label">Full name</label>
+              <br />
+              <input
+                type="text"
+                id="name"
+                class="name-input"
+                placeholder="full name"
+                required
+              />
+              <br />
+              <label for="address">Address</label>
+              <br />
+              <input type="text" class="address-input" id="address" />
+              <div class="contact-container">
+                <p>Contact Information</p>
+                <label for="phone">Phone #</label>
+                <br />
+                <input type="text" class="phone-input" id="phone" />
+                <br />
+                <label for="email">Email</label>
+                <br />
+                <input type="email" class="email-input" id="email" />
+              </div>
+            </div>
+            <div class="uploaded-photo-container"></div>
+          </div>
+          <div class="photo-container">
+            <label for="photo" class="photo-label">Upload Photo</label>
+            <input type="file" id="photo" />
+            <p class="no-photo">
+              Without Photo
+              <input type="checkbox" class="photo-btn" />
+            </p>
+          </div>
+        </div>
+        <div class="education-main-container">
+          <div class="education">
+            <h3>Education</h3>
+            <label for="university">School/College/University</label>
+            <br />
+            <input type="text" id="university" class="university-input" />
+            <br />
+            <label for="specialty">Specialty</label>
+            <br />
+            <input type="text" id="specialty" class="specialty-input" />
+            <div class="date-container">
+              <div>
+                <label for="start-date">Started...</label>
+                <br />
+                <input type="date" id="start-date" class="start-date-input" />
+              </div>
+              <div>
+                <label for="finish-date">Finished...</label>
+                <br />
+                <input type="date" id="finish-date" class="finish-date-input" />
+              </div>
+            </div>
+          </div>
+          <button class="add-education">Add More Education</button>
+        </div>
+        <!-- experience section -->
+        <div class="experience-main-container">
+          <h3>Experience</h3>
+          <div class="experience-details">
+            <label for="employer-name">Company Name</label>
+            <br />
+            <input type="text" id="employer-name" class="employer-name-input" />
+            <br />
+            <label for="occupation">Occupation</label>
+            <br />
+            <input type="text" id="occupation" class="occupation-input" />
+            <label for="job-description">Brief Description</label>
+            <br />
+            <textarea
+              id="job-description"
+              class="job-description-input"
+            ></textarea>
+            <div class="experience-date-container">
+              <div>
+                <label for="job-start-date">Started...</label>
+                <br />
+                <input
+                  type="date"
+                  id="job-start-date"
+                  class="job-start-date-input"
+                />
+              </div>
+              <div>
+                <label for="job-finish-date">Finished...</label>
+                <br />
+                <input
+                  type="date"
+                  id="job-finish-date"
+                  class="job-finish-date-input"
+                />
+              </div>
+            </div>
+          </div>
+          <button class="add-experience">Add more experience</button>
+        </div>
       </form>
     </main>
     <footer></footer>
+    <script src="./script.js" type="module"></script>
   </body>
 </html>
