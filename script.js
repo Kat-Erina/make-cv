@@ -1,6 +1,9 @@
-// "use strict";
+"use strict";
 // DOM ELEMETS
-import { updateEducationContainerHtml } from "./functions.js";
+import {
+  updateEducationContainerHtml,
+  updateEducationInput,
+} from "./functions.js";
 const nameInput = document.querySelector(".name-input");
 const phone = document.querySelector(".phone-input");
 const email = document.querySelector(".email-input");
@@ -10,29 +13,16 @@ const desiredJob = document.querySelector(".desired-job-input");
 const addEducationBtn = document.querySelector(".add-education");
 let array = [nameInput, phone, email, address, aboutMe, desiredJob];
 
-let educationValue = {
-  university: "",
-  specialty: "",
-  ["start-date"]: "",
-  ["finish-date"]: "",
-};
-const personObj = {
-  name: "",
+const personObj = JSON.parse(localStorage.getItem("person")) || {
+  nameInput: "",
   address: "",
-  aboutMe: "",
+  about: "",
   phone: "",
   email: "",
-  education: [
-    {
-      university: "",
-      specialty: "",
-      ["start-date"]: "",
-      ["finish-date"]: "",
-    },
-  ],
-  experience: [],
   photo: "",
+  desiredJob: "",
 };
+
 // personal information functionality
 
 function updateLocalStorage(target) {
@@ -43,97 +33,64 @@ function updateLocalStorage(target) {
 }
 
 array.forEach((element) => {
+  element.value = personObj[element.id];
   element.addEventListener("input", (e) => {
     updateLocalStorage(e.target);
   });
 });
 
 // educatioon finctionality
+let educationId = 0;
+let educationValue = {
+  educationId,
+  university: "",
+  specialty: "",
+  ["start-date"]: "",
+  ["finish-date"]: "",
+};
+let educationArray = [educationValue];
+let fetchedEducation =
+  JSON.parse(localStorage.getItem("education")) || educationArray;
 
 let id = 1;
 addEducationBtn.addEventListener("click", (e) => {
   e.preventDefault();
-
-  let fetchedPersonObject =
-    JSON.parse(localStorage.getItem("person")) || personObj;
-  console.log(fetchedPersonObject);
-  fetchedPersonObject.education.push(educationValue);
-  console.log(fetchedPersonObject);
+  let fetchedEducationArray =
+    JSON.parse(localStorage.getItem("education")) || educationArray;
+  fetchedEducationArray.push(educationValue);
   updateEducationContainerHtml(id);
   id++;
-  console.log(id);
-  attachEventListeners();
-
-  localStorage.setItem("person", JSON.stringify(fetchedPersonObject));
+  attachEventListenersEducation();
+  localStorage.setItem("education", JSON.stringify(fetchedEducationArray));
 });
-// function updateUniversityInput(target, index) {
-//   let targetId = target.closest(".education").getAttribute("id");
-//   console.log(targetId);
-// }
 
-function attachEventListeners() {
+function attachEventListenersEducation() {
   let universityInputs = document.querySelectorAll(".university-input");
   let specialtyInput = document.querySelectorAll(".specialty-input");
   let schoolStartDate = document.querySelectorAll(".start-date-input");
   let schoolFinishDate = document.querySelectorAll(".finish-date-input");
 
   universityInputs.forEach((el) => {
-    el.addEventListener("input", (e) => {
-      console.log(e.target.value);
-      let targetId = e.target.closest(".education").getAttribute("id");
-      console.log(targetId);
-      let fetchedPersonObject =
-        JSON.parse(localStorage.getItem("person")) || personObj;
-      console.log(fetchedPersonObject);
-      let educationInformation = {
-        ...fetchedPersonObject.education[targetId],
-        [e.target.id]: e.target.value,
-      };
-      console.log(educationInformation);
-      let updatedObject = {
-        ...fetchedPersonObject,
-        education: [
-          educationInformation,
-          ...fetchedPersonObject.education, // Copy the rest of the elements
-        ],
-      };
-      localStorage.setItem("person", JSON.stringify(updatedObject));
-    });
+    test(el);
   });
   specialtyInput.forEach((el) => {
-    el.addEventListener("input", (e) => {
-      console.log(e.target.value);
-      // Call your function here if needed
-      // updateUniversityInput(e.target);
-    });
+    test(el);
   });
   schoolStartDate.forEach((el) => {
-    el.addEventListener("input", (e) => {
-      console.log(e.target.value);
-      // Call your function here if needed
-      // updateUniversityInput(e.target);
-    });
+    test(el);
   });
   schoolFinishDate.forEach((el) => {
-    el.addEventListener("input", (e) => {
-      console.log(e.target.value);
-      // Call your function here if needed
-      // updateUniversityInput(e.target);
-    });
+    test(el);
   });
 }
 
-attachEventListeners();
+attachEventListenersEducation();
 
-function UpdateEducation(el) {
-  let targetId = el.closest(".education").getAttribute("id");
-  console.log(targetId);
-  let fetchedPersonObject =
-    JSON.parse(localStorage.getItem("person")) || personObj;
-  console.log(fetchedPersonObject);
-
-  let { education } = fetchedPersonObject;
-  console.log(education[targetId], targetId);
-}
-//
 // localStorage.clear();
+
+function test(el) {
+  el.addEventListener("input", (e) => {
+    console.log(e.target.value);
+    updateEducationInput(e.target, "education", educationArray);
+  });
+}

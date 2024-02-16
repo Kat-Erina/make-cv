@@ -38,3 +38,15 @@ export const educationArray = [
   schoolFinishDate,
   schoolStartDate,
 ];
+
+export function updateEducationInput(target, inputType, arr) {
+  let targetId = target.closest(".education").getAttribute("id");
+  let fetchedArray = JSON.parse(localStorage.getItem(`${inputType}`)) || arr;
+  let educationUpdateInfo = {
+    ...fetchedArray[targetId],
+    [target.id]: target.value,
+  };
+  fetchedArray.splice(targetId, 1, educationUpdateInfo);
+
+  localStorage.setItem(`${inputType}`, JSON.stringify(fetchedArray));
+}
