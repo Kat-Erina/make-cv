@@ -24,29 +24,85 @@ export function updateEducationContainerHtml(id) {
 
   document
     .querySelector(".education-main-container")
-    .insertAdjacentHTML("afterBegin", educationDivHTML);
+    .insertAdjacentHTML("beforeEnd", educationDivHTML);
 }
 
-const universityInput = document.querySelector(".university-input");
-const specialtyInput = document.querySelector(".specialty-input");
-const schoolStartDate = document.querySelector(".start-date-input");
-const schoolFinishDate = document.querySelector(".finish-date-input");
+export const educationValue = {
+  university: "",
+  specialty: "",
+  ["start-date"]: "",
+  ["finish-date"]: "",
+};
 
-export const educationArray = [
-  universityInput,
-  specialtyInput,
-  schoolFinishDate,
-  schoolStartDate,
-];
+export const nameInput = document.querySelector(".name-input");
+export const phone = document.querySelector(".phone-input");
+export const email = document.querySelector(".email-input");
+export const address = document.querySelector(".address-input");
+export const aboutMe = document.querySelector(".about-me-input");
+export const desiredJob = document.querySelector(".desired-job-input");
+export const addEducationBtn = document.querySelector(".add-education");
 
-export function updateEducationInput(target, inputType, arr) {
-  let targetId = target.closest(".education").getAttribute("id");
+export const array = [nameInput, phone, email, address, aboutMe, desiredJob];
+
+export function updateInput(target, inputType, arr) {
+  let targetId = target.closest(`.${inputType}`).getAttribute("id");
   let fetchedArray = JSON.parse(localStorage.getItem(`${inputType}`)) || arr;
-  let educationUpdateInfo = {
+  let updateInfo = {
     ...fetchedArray[targetId],
     [target.id]: target.value,
   };
-  fetchedArray.splice(targetId, 1, educationUpdateInfo);
+  fetchedArray.splice(targetId, 1, updateInfo);
 
   localStorage.setItem(`${inputType}`, JSON.stringify(fetchedArray));
+}
+
+//Experience Funcionality
+
+export const experienceValue = {
+  employer: "",
+  occupation: "",
+  description: "",
+  ["start-date"]: "",
+  ["finish-date"]: "",
+};
+
+export function updateExperienceHtml(id) {
+  let experienceDivHtml = `      <div class="experience-details" id=${id}>
+  <label for="employer-name">Company Name</label>
+  <br />
+  <input type="text" id="employer-name" class="employer-name-input" />
+  <br />
+  <label for="occupation">Occupation</label>
+  <br />
+  <input type="text" id="occupation" class="occupation-input" />
+  <label for="job-description">Brief Description</label>
+  <br />
+  <textarea
+    id="job-description"
+    class="job-description-input"
+  ></textarea>
+  <div class="experience-date-container">
+    <div>
+      <label for="job-start-date">Started...</label>
+      <br />
+      <input
+        type="date"
+        id="job-start-date"
+        class="job-start-date-input"
+      />
+    </div>
+    <div>
+      <label for="job-finish-date">Finished...</label>
+      <br />
+      <input
+        type="date"
+        id="job-finish-date"
+        class="job-finish-date-input"
+      />
+    </div>
+  </div>
+</div>`;
+  document
+    .querySelector(".experience-main-container")
+    .insertAdjacentHTML("beforeEnd", experienceDivHtml);
 }
