@@ -20,6 +20,7 @@ export function updateEducationContainerHtml(id) {
       <input type="date" id="finish-date" class="finish-date-input" />
     </div>
   </div>
+  <button class="education-btn" data-edu-id=${id}>Remove</button>
   </div>`;
 
   document
@@ -28,6 +29,7 @@ export function updateEducationContainerHtml(id) {
 }
 
 export const educationValue = {
+  id: 0,
   university: "",
   specialty: "",
   ["start-date"]: "",
@@ -41,11 +43,12 @@ export const address = document.querySelector(".address-input");
 export const aboutMe = document.querySelector(".about-me-input");
 export const desiredJob = document.querySelector(".desired-job-input");
 export const addEducationBtn = document.querySelector(".add-education");
+export const uploadedPicture = document.querySelector(".uploaded-photo");
 
 export const array = [nameInput, phone, email, address, aboutMe, desiredJob];
 
-export function updateInput(target, inputType, arr) {
-  let targetId = target.closest(`.${inputType}`).getAttribute("id");
+export function updateInput(target, inputType, arr, id) {
+  let targetId = target.closest(`.${inputType}`).getAttribute(`${id}`);
   let fetchedArray = JSON.parse(localStorage.getItem(`${inputType}`)) || arr;
   let updateInfo = {
     ...fetchedArray[targetId],
@@ -59,15 +62,15 @@ export function updateInput(target, inputType, arr) {
 //Experience Funcionality
 
 export const experienceValue = {
-  employer: "",
+  ["employer-name"]: "",
   occupation: "",
-  description: "",
-  ["start-date"]: "",
-  ["finish-date"]: "",
+  ["job-description"]: "",
+  ["job-start-date"]: "",
+  ["job-finish-date"]: "",
 };
 
 export function updateExperienceHtml(id) {
-  let experienceDivHtml = `      <div class="experience-details" id=${id}>
+  let experienceDivHtml = `      <div class="experience-details" data-id=${id}>
   <label for="employer-name">Company Name</label>
   <br />
   <input type="text" id="employer-name" class="employer-name-input" />
@@ -101,8 +104,30 @@ export function updateExperienceHtml(id) {
       />
     </div>
   </div>
+  
 </div>`;
   document
     .querySelector(".experience-main-container")
     .insertAdjacentHTML("beforeEnd", experienceDivHtml);
+}
+
+// updating LocalStorage
+
+export function updateContent(
+  contentHtml,
+  localStorageName,
+  addToLocalStorage
+) {
+  contentHtml = document.querySelector(`.${localStorageName}`).innerHTML;
+  localStorage.setItem(`${addToLocalStorage}`, JSON.stringify(contentHtml));
+}
+
+// Upload Picture
+
+export function uploadPictureFnc(event) {
+  const picFile = event.target;
+
+  let img = picFile.result;
+  uploadedPicture.src = img;
+  window.localStorage.setItem("image", JSON.stringify(img));
 }

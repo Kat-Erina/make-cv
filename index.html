@@ -55,11 +55,13 @@
                 <input type="email" class="email-input" id="email" />
               </div>
             </div>
-            <div class="uploaded-photo-container"></div>
+            <div class="uploaded-photo-container">
+              <img class="uploaded-photo" alt="photo" src=" " />
+            </div>
           </div>
           <div class="photo-container">
             <label for="photo" class="photo-label">Upload Photo</label>
-            <input type="file" id="photo" />
+            <input type="file" id="photo" accept="image/*" />
             <p class="no-photo">
               Without Photo
               <input type="checkbox" class="photo-btn" />
@@ -88,13 +90,14 @@
                 <input type="date" id="finish-date" class="finish-date-input" />
               </div>
             </div>
+            <button class="education-btn" data-edu-id="0">Remove</button>
           </div>
         </div>
         <button class="add-education">Add More Education</button>
         <!-- experience section -->
         <div class="experience-main-container">
           <h3>Experience</h3>
-          <div class="experience-details">
+          <div class="experience-details" data-id="0">
             <label for="employer-name">Company Name</label>
             <br />
             <input type="text" id="employer-name" class="employer-name-input" />
