@@ -69,6 +69,20 @@ export const experienceValue = {
   ["job-finish-date"]: "",
 };
 
+export function updateRefHTML(id) {
+  let referenceHTML = ` <div class="reference" data-ref-id=${id}>
+  <label for="reference-name"> Reference Name </label>
+  <input type="text" placeholder="ref. name" id="reference-name" />
+  <label for="reference-email"> Reference Name </label>
+  <input type="email" placeholder="ref.email" id="reference-email" />
+  <button>Remove Reference</button>
+</div>`;
+
+  document
+    .querySelector(".references-main-container")
+    .insertAdjacentHTML("beforeEnd", referenceHTML);
+}
+
 export function updateExperienceHtml(id) {
   let experienceDivHtml = `      <div class="experience-details" data-id=${id}>
   <label for="employer-name">Company Name</label>
@@ -130,4 +144,49 @@ export function uploadPictureFnc(event) {
   let img = picFile.result;
   uploadedPicture.src = img;
   window.localStorage.setItem("image", JSON.stringify(img));
+}
+
+// reference container
+
+export const refValue = {
+  ["reference-name"]: "",
+  ["reference-email"]: "",
+};
+
+// skill container functionality
+
+export let skillValue = {
+  ["level-select"]: "",
+  ["skill-name"]: "",
+};
+
+// html for skills container
+
+export function updateSkillsHtml(id) {
+  let skillsDivHTML = `
+  <div class="skills-container" data-skill-id=${id}>
+  <div class="skill">
+    <label for="skill-name">Skill</label>
+    <input
+      type="text"
+      id="skill-name"
+      placeholder="enter skill name"
+    />
+  </div>
+  <div class="level-container">
+    <label for="level-label">Level</label>
+    <select id="level-select">
+      <option data-option-id="0">Enter Level</option>
+      <option data-option-id="1">beginner</option>
+      <option data-option-id="2">intermediate</option>
+      <option data-option-id="3">skilfull</option>
+      <option data-option-id="4">experienced</option>
+      <option data-option-id="5">Professional</option>
+    </select>
+  </div>
+  <button>Remove Skill</button>
+</div>`;
+  document
+    .querySelector(".skills-main-container")
+    .insertAdjacentHTML("beforeEnd", skillsDivHTML);
 }

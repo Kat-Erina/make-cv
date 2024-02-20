@@ -12,6 +12,10 @@ import {
   desiredJob,
   uploadedPicture,
   uploadPictureFnc,
+  refValue,
+  updateRefHTML,
+  skillValue,
+  updateSkillsHtml,
 } from "./functions.js";
 
 // DOM Elements for Personal Information
@@ -30,8 +34,10 @@ let universityInputs = document.querySelectorAll(".university-input");
 let specialtyInput = document.querySelectorAll(".specialty-input");
 let schoolStartDate = document.querySelectorAll(".start-date-input");
 let schoolFinishDate = document.querySelectorAll(".finish-date-input");
-let eduBtns = document.querySelectorAll(".education-btn");
-
+let eduBtns = Array.from(document.querySelectorAll(".education-btn"));
+let allEducationDivs = document.querySelectorAll(".education");
+let allDivs = Array.from(allEducationDivs);
+console.log(allDivs.length);
 //Dom Elements for Experience Section
 
 let employerInput = document.querySelectorAll(".employer-name-input");
@@ -43,6 +49,12 @@ let removeExperienceBtn = document.querySelectorAll(".remove-experience");
 
 const addExperienceBtn = document.querySelector(".add-experience");
 
+// Dom Elements for Reference Container
+let refMainContainer = document.querySelector(".references-main-container");
+let allReferenceContainer = document.querySelectorAll(".reference");
+let refName = document.querySelectorAll("#reference-name");
+let refEmail = document.querySelectorAll("#reference-email");
+let addRefBtn = document.querySelector(".add-reference");
 // personal information functionality
 
 function updateLocalStorage(target) {
@@ -60,26 +72,23 @@ array.forEach((element) => {
 });
 // localStorage.clear();
 // EducationFunctionality
-let educationContainerHTML =
-  JSON.parse(localStorage.getItem("educationHTML")) ||
-  document.querySelector(".education-main-container").innerHTML;
-document.querySelector(".education-main-container").innerHTML =
-  educationContainerHTML;
+
 let educationArray = [educationValue];
 
 // / es satestoa
-
 if (
   localStorage.getItem("education") === null ||
-  localStorage.getItem("education") === undefined ||
-  localStorage.getItem("education") === ""
+  (localStorage.getItem("education") === undefined && allDivs.length != 0)
 ) {
-  // Set the value for "education" in local storage
   localStorage.setItem("education", JSON.stringify(educationArray));
 }
-// localStorage.setItem("education", JSON.stringify(educationArray));
 
-// es satestoa
+let educationContainerHTML =
+  JSON.parse(localStorage.getItem("educationHTML")) ||
+  document.querySelector(".education-main-container").innerHTML;
+
+document.querySelector(".education-main-container").innerHTML =
+  educationContainerHTML;
 let fetchedEducation =
   JSON.parse(localStorage.getItem("education")) || educationArray;
 console.log(fetchedEducation);
@@ -100,6 +109,9 @@ addEducationBtn.addEventListener("click", (e) => {
     "education-main-container",
     "educationHTML"
   );
+  eduBtns = Array.from(document.querySelectorAll(".education-btn"));
+  allEducationDivs = Array.from(document.querySelectorAll(".education"));
+  console.log(allEducationDivs, eduBtns);
 });
 // localStorage.clear();
 // localStorage.clear();
@@ -108,7 +120,9 @@ function attachEventListenersEducation() {
   specialtyInput = document.querySelectorAll(".specialty-input");
   schoolStartDate = document.querySelectorAll(".start-date-input");
   schoolFinishDate = document.querySelectorAll(".finish-date-input");
-  eduBtns = document.querySelectorAll(".education-btn");
+  eduBtns = Array.from(document.querySelectorAll(".education-btn"));
+  allEducationDivs = Array.from(document.querySelectorAll(".education"));
+  console.log(eduBtns, allEducationDivs);
 
   universityInputs.forEach((el) => {
     inputEventHandler(el);
@@ -123,6 +137,7 @@ function attachEventListenersEducation() {
     inputEventHandler(el);
   });
 
+  // es aris washlis kodis//
   // eduBtns.forEach((btn) => {
   //   handleRemoveFunction(btn);
   // });
@@ -138,34 +153,56 @@ function attachEventListenersEducation() {
 // };
 // console.log(fetchedEducation);
 
-// let allEducationDivs = Array.from(document.querySelectorAll(".education"));
-// console.log(allEducationDivs);
+// localStorage.clear();
+//
+// eduBtns = Array.from(document.querySelectorAll(".education-btn"));
+// allEducationDivs = Array.from(document.querySelectorAll(".education"));
+// // console.log(allEducationDivs);
 // allEducationDivs.forEach((el) => {
 //   el.addEventListener("click", (e) => {
 //     e.preventDefault();
+//     console.log(eduBtns);
 //     if (e.target.classList.contains("education-btn")) {
 //       let fetchedEducationArray =
 //         JSON.parse(localStorage.getItem("education")) || educationArray;
 //       console.log(e.target);
+//       console.log(fetchedEducationArray);
 //       let btnId = e.target.getAttribute("data-edu-id");
+//       console.log(btnId);
 //       let targetItem = fetchedEducationArray.findIndex((item) => {
 //         return item.id == btnId;
 //       });
 //       console.log(targetItem);
-// fetchedEducationArray.splice(targetItem, 1);
-// localStorage.setItem("education", JSON.stringify(fetchedEducationArray));
-// let container = Array.from(document.querySelectorAll(`.education`));
-// let item = container[btnId];
-// console.log(item);
-// item.remove();
+//       fetchedEducationArray.splice(targetItem, 1);
+//       console.log(fetchedEducationArray);
+//       localStorage.setItem("education", JSON.stringify(fetchedEducationArray));
+
+//       //esaa problemuri
+//       let container = Array.from(document.querySelectorAll(`.education`));
+//       let item = container[targetItem];
+//       console.log(item);
+//       item.remove();
+//       localStorage.setItem(
+//         "educationHTML",
+//         JSON.stringify(
+//           document.querySelector(".education-main-container").innerHTML
+//         )
+//       );
+//       eduBtns = Array.from(document.querySelectorAll(".education-btn"));
+//       allEducationDivs = Array.from(document.querySelectorAll(".education"));
+//       allEducationDivs = Array.from(document.querySelectorAll(".education"));
+//       console.log(eduBtns, allEducationDivs, allEducationDivs);
 //     }
 //   });
+//   //
 // });
 // function handleRemoveFunction(el) {
 //   el.addEventListener("click", (e) => {
-//     fetchedEducation.forEach((item)=>{
-//       if()
-//     })
+//     e.preventDefault();
+//     fetchedEducation.forEach((item) => {
+//       if (0 < 2) {
+//       }
+//     });
 //     // e.preventDefault();
 //     // removeItem(e.target, optionsEducation);
 //   });
@@ -240,6 +277,7 @@ let experienceArray = [experienceValue];
 let fetchedExperience =
   JSON.parse(localStorage.getItem("experience-details")) || experienceArray;
 let expId = fetchedExperience.length;
+
 addExperienceBtn.addEventListener("click", (e) => {
   e.preventDefault();
   let fetchedExperienceArray =
@@ -259,7 +297,7 @@ addExperienceBtn.addEventListener("click", (e) => {
     "experienceHTML"
   );
 });
-
+// localStorage.clear();
 function attachEventListenersExperience() {
   employerInput = document.querySelectorAll(".employer-name-input");
   occupationInput = document.querySelectorAll(".occupation-input");
@@ -317,3 +355,118 @@ photo.addEventListener("change", (e) => {
     picReader.readAsDataURL(files[0]);
   }
 });
+
+// Reference functionality
+
+let refContainerHTML =
+  JSON.parse(localStorage.getItem("refHtml")) ||
+  document.querySelector(".references-main-container").innerHTML;
+document.querySelector(".references-main-container").innerHTML =
+  refContainerHTML;
+let refArray = [refValue];
+let fetchedReferences =
+  JSON.parse(localStorage.getItem("reference")) || refArray;
+let refId = fetchedReferences.length;
+console.log(refId);
+
+addRefBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  let fetchedRefAArray =
+    JSON.parse(localStorage.getItem("reference")) || refArray;
+  fetchedRefAArray.push(refValue);
+  localStorage.setItem("reference", JSON.stringify(fetchedRefAArray));
+  updateRefHTML(refId);
+  refId++;
+  attachEventListenersReference();
+  updateContent(refContainerHTML, "references-main-container", "refHtml");
+});
+
+function attachEventListenersReference() {
+  refName = document.querySelectorAll("#reference-name");
+  refEmail = document.querySelectorAll("#reference-email");
+  refName.forEach((el) => {
+    inputEventHandler3(el);
+  });
+  refEmail.forEach((el) => {
+    inputEventHandler3(el);
+  });
+}
+
+function inputEventHandler3(el) {
+  el.addEventListener("input", (e) => {
+    updateInput(e.target, "reference", refArray, "data-ref-id");
+  });
+}
+
+attachEventListenersReference();
+
+for (let i = 0; i < fetchedReferences.length; i++) {
+  refName[i].value = fetchedReferences[i]["reference-name"];
+  refEmail[i].value = fetchedReferences[i]["reference-email"];
+}
+
+// skills Container functionality
+
+let skillsContainerHTML =
+  JSON.parse(localStorage.getItem("skillHtml")) ||
+  document.querySelector(".skills-main-container").innerHTML;
+document.querySelector(".skills-main-container").innerHTML =
+  skillsContainerHTML;
+//
+let skillsArray = [skillValue];
+let fetchedSkills =
+  JSON.parse(localStorage.getItem("skills-container")) || skillsArray;
+let skillId = fetchedSkills.length;
+console.log(skillId);
+
+let skillLevel = document.querySelector(".level-select");
+let skillName = document.querySelector("#skill-name");
+let addSkillBtn = document.querySelector(".add-skill");
+skillLevel.addEventListener("input", (e) => {
+  e.preventDefault();
+  console.log(e.target.value);
+});
+
+function attachEventListenersSkills() {
+  skillName = document.querySelectorAll("#skill-name");
+  skillLevel = document.querySelectorAll(".level-select");
+  skillName.forEach((el) => {
+    el.addEventListener("input", (e) => {
+      updateInput(e.target, "skills-container", skillsArray, "data-skill-id");
+    });
+  });
+  skillLevel.forEach((el) => {
+    inputEventHandler4(el);
+    // console.log(el.target)
+  });
+}
+function inputEventHandler4(el) {
+  el.addEventListener("input", (e) => {
+    console.log(e.target.children);
+    updateInput(e.target, "skills-container", skillsArray, "data-skill-id");
+  });
+}
+attachEventListenersSkills();
+
+addSkillBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  let fetchedRefAArray =
+    JSON.parse(localStorage.getItem("skills-container")) || skillsArray;
+  fetchedRefAArray.push(skillValue);
+  localStorage.setItem("skills-container", JSON.stringify(fetchedRefAArray));
+  // updateRefHTML(refId);
+  updateSkillsHtml(skillId);
+  skillId++;
+  attachEventListenersSkills();
+  updateContent(skillsContainerHTML, "skills-main-container", "skillHtml");
+});
+
+for (let i = 0; i < fetchedSkills.length; i++) {
+  skillName[i].value = fetchedSkills[i]["skill-name"];
+  // skillLevel[i].value = fetchedReferences[i]["level-select"];
+}
+// localStorage.clear();
+
+// recontainerHtml=skillsContainerHTML
+// references-main-containrr= "skills-main-container"
+// refHtml="skillHtml"

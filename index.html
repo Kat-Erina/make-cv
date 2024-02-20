@@ -134,6 +134,42 @@
           </div>
         </div>
         <button class="add-experience">Add more experience</button>
+        <div class="references-main-container">
+          <h3>References</h3>
+          <div class="reference" data-ref-id="0">
+            <label for="reference-name"> Reference Name </label>
+            <input type="text" placeholder="ref. name" id="reference-name" />
+            <label for="reference-email"> Reference Name </label>
+            <input type="email" placeholder="ref.email" id="reference-email" />
+            <button>Remove Reference</button>
+          </div>
+        </div>
+        <button class="add-reference">Add more reference</button>
+        <div class="skills-main-container">
+          <div class="skills-container" data-skill-id="0">
+            <div class="skill">
+              <label for="skill-name">Skill</label>
+              <input
+                type="text"
+                id="skill-name"
+                placeholder="enter skill name"
+              />
+            </div>
+            <div class="level-container">
+              <label for="level-label">Level</label>
+              <select id="level-label" class="level-select">
+                <option data-option-id="0">Enter Level</option>
+                <option data-option-id="1">beginner</option>
+                <option data-option-id="2">intermediate</option>
+                <option data-option-id="3">skilfull</option>
+                <option data-option-id="4">experienced</option>
+                <option>Professional</option>
+              </select>
+            </div>
+            <button>Remove Skill</button>
+          </div>
+          <button class="add-skill">Add more skill</button>
+        </div>
       </form>
     </main>
     <footer></footer>
