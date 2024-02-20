@@ -37,7 +37,6 @@ let schoolFinishDate = document.querySelectorAll(".finish-date-input");
 let eduBtns = Array.from(document.querySelectorAll(".education-btn"));
 let allEducationDivs = document.querySelectorAll(".education");
 let allDivs = Array.from(allEducationDivs);
-console.log(allDivs.length);
 //Dom Elements for Experience Section
 
 let employerInput = document.querySelectorAll(".employer-name-input");
@@ -70,12 +69,9 @@ array.forEach((element) => {
     updateLocalStorage(e.target);
   });
 });
-// localStorage.clear();
-// EducationFunctionality
 
 let educationArray = [educationValue];
 
-// / es satestoa
 if (
   localStorage.getItem("education") === null ||
   (localStorage.getItem("education") === undefined && allDivs.length != 0)
@@ -91,7 +87,7 @@ document.querySelector(".education-main-container").innerHTML =
   educationContainerHTML;
 let fetchedEducation =
   JSON.parse(localStorage.getItem("education")) || educationArray;
-console.log(fetchedEducation);
+
 let id = fetchedEducation.length;
 addEducationBtn.addEventListener("click", (e) => {
   e.preventDefault();
@@ -113,8 +109,7 @@ addEducationBtn.addEventListener("click", (e) => {
   allEducationDivs = Array.from(document.querySelectorAll(".education"));
   console.log(allEducationDivs, eduBtns);
 });
-// localStorage.clear();
-// localStorage.clear();
+
 function attachEventListenersEducation() {
   universityInputs = document.querySelectorAll(".university-input");
   specialtyInput = document.querySelectorAll(".specialty-input");
@@ -420,6 +415,7 @@ let skillId = fetchedSkills.length;
 console.log(skillId);
 
 let skillLevel = document.querySelector(".level-select");
+console.log(skillLevel);
 let skillName = document.querySelector("#skill-name");
 let addSkillBtn = document.querySelector(".add-skill");
 skillLevel.addEventListener("input", (e) => {
@@ -430,22 +426,42 @@ skillLevel.addEventListener("input", (e) => {
 function attachEventListenersSkills() {
   skillName = document.querySelectorAll("#skill-name");
   skillLevel = document.querySelectorAll(".level-select");
+  console.log(skillLevel);
   skillName.forEach((el) => {
     el.addEventListener("input", (e) => {
+      console.log(e.target.value);
       updateInput(e.target, "skills-container", skillsArray, "data-skill-id");
     });
   });
   skillLevel.forEach((el) => {
-    inputEventHandler4(el);
-    // console.log(el.target)
+    el.addEventListener("input", (e) => {
+      e.preventDefault();
+      // inputEventHandler4(e.target);
+      updateInput(e.target, "skills-container", skillsArray, "data-skill-id");
+      console.log(e.target);
+      console.log(e.target.value);
+    });
   });
 }
-function inputEventHandler4(el) {
-  el.addEventListener("input", (e) => {
-    console.log(e.target.children);
-    updateInput(e.target, "skills-container", skillsArray, "data-skill-id");
-  });
-}
+// function inputEventHandler4(el) {
+//   el.addEventListener("change", (e) => {
+//     console.log(e.target.children);
+//     updateInput(e.target, "skills-container", skillsArray, "data-skill-id");
+//   });
+// }
+
+// function updateInput(target, inputType, arr, id) {
+//   let targetId = target.closest(`.${inputType}`).getAttribute(`${id}`);
+//   let fetchedArray = JSON.parse(localStorage.getItem(`${inputType}`)) || arr;
+//   let updateInfo = {
+//     ...fetchedArray[targetId],
+//     [target.id]: target.value,
+//   };
+//   fetchedArray.splice(targetId, 1, updateInfo);
+
+//   localStorage.setItem(`${inputType}`, JSON.stringify(fetchedArray));
+// }
+
 attachEventListenersSkills();
 
 addSkillBtn.addEventListener("click", (e) => {
@@ -454,7 +470,6 @@ addSkillBtn.addEventListener("click", (e) => {
     JSON.parse(localStorage.getItem("skills-container")) || skillsArray;
   fetchedRefAArray.push(skillValue);
   localStorage.setItem("skills-container", JSON.stringify(fetchedRefAArray));
-  // updateRefHTML(refId);
   updateSkillsHtml(skillId);
   skillId++;
   attachEventListenersSkills();
@@ -463,10 +478,6 @@ addSkillBtn.addEventListener("click", (e) => {
 
 for (let i = 0; i < fetchedSkills.length; i++) {
   skillName[i].value = fetchedSkills[i]["skill-name"];
-  // skillLevel[i].value = fetchedReferences[i]["level-select"];
+  skillLevel[i].value = fetchedSkills[i]["level-label"];
 }
 // localStorage.clear();
-
-// recontainerHtml=skillsContainerHTML
-// references-main-containrr= "skills-main-container"
-// refHtml="skillHtml"

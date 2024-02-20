@@ -156,7 +156,7 @@ export const refValue = {
 // skill container functionality
 
 export let skillValue = {
-  ["level-select"]: "",
+  ["level-label"]: "",
   ["skill-name"]: "",
 };
 
@@ -175,11 +175,11 @@ export function updateSkillsHtml(id) {
   </div>
   <div class="level-container">
     <label for="level-label">Level</label>
-    <select id="level-select">
+    <select id="level-label" class="level-select">
       <option data-option-id="0">Enter Level</option>
       <option data-option-id="1">beginner</option>
       <option data-option-id="2">intermediate</option>
-      <option data-option-id="3">skilfull</option>
+      <option data-option-id="3">skillfull</option>
       <option data-option-id="4">experienced</option>
       <option data-option-id="5">Professional</option>
     </select>
