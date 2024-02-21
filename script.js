@@ -34,8 +34,10 @@ let universityInputs = document.querySelectorAll(".university-input");
 let specialtyInput = document.querySelectorAll(".specialty-input");
 let schoolStartDate = document.querySelectorAll(".start-date-input");
 let schoolFinishDate = document.querySelectorAll(".finish-date-input");
-let eduBtns = Array.from(document.querySelectorAll(".education-btn"));
-let allEducationDivs = document.querySelectorAll(".education");
+let educationDeleteBtns = Array.from(
+  document.querySelectorAll(".education-btn")
+);
+let allEducationDivs = Array.from(document.querySelectorAll(".education"));
 let allDivs = Array.from(allEducationDivs);
 //Dom Elements for Experience Section
 
@@ -44,7 +46,12 @@ let occupationInput = document.querySelectorAll(".occupation-input");
 let jobDescriptionInput = document.querySelectorAll(".job-description-input");
 let jobStartDate = document.querySelectorAll(".job-start-date-input");
 let jobFinishDate = document.querySelectorAll(".job-finish-date-input");
-let removeExperienceBtn = document.querySelectorAll(".remove-experience");
+let removeExperienceBtn = Array.from(
+  document.querySelectorAll(".remove-experience")
+);
+let allExperienceDivs = Array.from(
+  document.querySelectorAll(".experience-details")
+);
 
 const addExperienceBtn = document.querySelector(".add-experience");
 
@@ -94,6 +101,7 @@ addEducationBtn.addEventListener("click", (e) => {
   let fetchedEducationArray =
     JSON.parse(localStorage.getItem("education")) || educationArray;
   educationValue.id = id;
+  console.log(id);
   fetchedEducationArray.push(educationValue);
   localStorage.setItem("education", JSON.stringify(fetchedEducationArray));
   updateEducationContainerHtml(id);
@@ -105,19 +113,26 @@ addEducationBtn.addEventListener("click", (e) => {
     "education-main-container",
     "educationHTML"
   );
-  eduBtns = Array.from(document.querySelectorAll(".education-btn"));
-  allEducationDivs = Array.from(document.querySelectorAll(".education"));
-  console.log(allEducationDivs, eduBtns);
+  // eduBtns = Array.from(document.querySelectorAll(".education-btn"));
+  // allEducationDivs = Array.from(document.querySelectorAll(".education"));
 });
 
+let optionsEducation = {
+  id2: "data-edu-id",
+  prop1: "education",
+  prop2: "education",
+  array: fetchedEducation,
+  prop3: ".education-main-container",
+  prop4: "educationHTML",
+  prop5: id,
+};
 function attachEventListenersEducation() {
   universityInputs = document.querySelectorAll(".university-input");
   specialtyInput = document.querySelectorAll(".specialty-input");
   schoolStartDate = document.querySelectorAll(".start-date-input");
   schoolFinishDate = document.querySelectorAll(".finish-date-input");
-  eduBtns = Array.from(document.querySelectorAll(".education-btn"));
+  educationDeleteBtns = Array.from(document.querySelectorAll(".education-btn"));
   allEducationDivs = Array.from(document.querySelectorAll(".education"));
-  console.log(eduBtns, allEducationDivs);
 
   universityInputs.forEach((el) => {
     inputEventHandler(el);
@@ -132,117 +147,46 @@ function attachEventListenersEducation() {
     inputEventHandler(el);
   });
 
-  // es aris washlis kodis//
-  // eduBtns.forEach((btn) => {
-  //   handleRemoveFunction(btn);
-  // });
+  educationDeleteBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+
+      removeItem(e.target, optionsEducation);
+    });
+  });
 }
 
-// let optionsEducation = {
-//   id: "data-edu-id",
-//   prop1: "education",
-//   prop2: "education",
-//   array: fetchedEducation,
-//   prop3: ".education-main-container",
-//   prop4: "educationHTML",
-// };
-// console.log(fetchedEducation);
+function removeItem(target, obj) {
+  let trgId = target.getAttribute(`${obj.id2}`);
+  console.log(trgId);
+  let container = Array.from(document.querySelectorAll(`.${obj.prop1}`));
 
-// localStorage.clear();
-//
-// eduBtns = Array.from(document.querySelectorAll(".education-btn"));
-// allEducationDivs = Array.from(document.querySelectorAll(".education"));
-// // console.log(allEducationDivs);
-// allEducationDivs.forEach((el) => {
-//   el.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     console.log(eduBtns);
-//     if (e.target.classList.contains("education-btn")) {
-//       let fetchedEducationArray =
-//         JSON.parse(localStorage.getItem("education")) || educationArray;
-//       console.log(e.target);
-//       console.log(fetchedEducationArray);
-//       let btnId = e.target.getAttribute("data-edu-id");
-//       console.log(btnId);
-//       let targetItem = fetchedEducationArray.findIndex((item) => {
-//         return item.id == btnId;
-//       });
-//       console.log(targetItem);
-//       fetchedEducationArray.splice(targetItem, 1);
-//       console.log(fetchedEducationArray);
-//       localStorage.setItem("education", JSON.stringify(fetchedEducationArray));
+  console.log(container);
+  let item = container.filter((el) => {
+    return el.id == trgId;
+  });
+  console.log(item);
 
-//       //esaa problemuri
-//       let container = Array.from(document.querySelectorAll(`.education`));
-//       let item = container[targetItem];
-//       console.log(item);
-//       item.remove();
-//       localStorage.setItem(
-//         "educationHTML",
-//         JSON.stringify(
-//           document.querySelector(".education-main-container").innerHTML
-//         )
-//       );
-//       eduBtns = Array.from(document.querySelectorAll(".education-btn"));
-//       allEducationDivs = Array.from(document.querySelectorAll(".education"));
-//       allEducationDivs = Array.from(document.querySelectorAll(".education"));
-//       console.log(eduBtns, allEducationDivs, allEducationDivs);
-//     }
-//   });
-//   //
-// });
-// function handleRemoveFunction(el) {
-//   el.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     fetchedEducation.forEach((item) => {
-//       if (0 < 2) {
-//       }
-//     });
-//     // e.preventDefault();
-//     // removeItem(e.target, optionsEducation);
-//   });
-// }
-// function removeItem(target, obj) {
-//   let trgId = target.getAttribute(`${obj.id}`);
-//   console.log(trgId);
-//   let container = Array.from(document.querySelectorAll(`.${obj.prop1}`));
-//   console.log(container);
-//   let item = container.filter((el) => {
-//     return el.id == trgId;
-//   });
-//   console.log(item);
-//   item[0].remove();
-//   let fetchedArray =
-//     JSON.parse(localStorage.getItem(`${obj.prop2}`)) || obj.array;
-//   console.log(fetchedArray);
-//   fetchedArray.splice(trgId, 1);
-//   console.log(fetchedArray);
-//   localStorage.setItem(`${obj.prop2}`, JSON.stringify(fetchedArray));
-//   let html = document.querySelector(`${obj.prop3}`).innerHTML;
+  let targetItem = container.findIndex((item) => {
+    return item.id == trgId;
+  });
 
-//   localStorage.setItem(`${obj.prop4}`, JSON.stringify(html));
-// }
+  console.log(targetItem);
+  //
+  item[0].remove();
+  let fetchedArray =
+    JSON.parse(localStorage.getItem(`${obj.prop2}`)) || obj.array;
+  console.log(fetchedArray);
+  fetchedArray.splice(targetItem, 1);
 
-// function removeItem(target, obj) {
-//   let trgId = target.getAttribute(`${obj.id}`);
-//   console.log(trgId);
-//   let container = Array.from(document.querySelectorAll(`.${obj.prop1}`));
-//   console.log(container);
-//   let item = container.filter((el) => {
-//     return el.id == trgId;
-//   });
-//   console.log(item);
-//   item[0].remove();
-//   let fetchedArray =
-//     JSON.parse(localStorage.getItem(`${obj.prop2}`)) || obj.array;
-//   console.log(fetchedArray);
-//   fetchedArray.splice(trgId, 1);
-//   console.log(fetchedArray);
-//   localStorage.setItem(`${obj.prop2}`, JSON.stringify(fetchedArray));
-//   let html = document.querySelector(`${obj.prop3}`).innerHTML;
-
-//   localStorage.setItem(`${obj.prop4}`, JSON.stringify(html));
-// }
+  console.log(fetchedArray);
+  localStorage.setItem(`${obj.prop2}`, JSON.stringify(fetchedArray));
+  let html = document.querySelector(`${obj.prop3}`).innerHTML;
+  id = fetchedArray.length;
+  console.log(id);
+  localStorage.setItem(`${obj.prop4}`, JSON.stringify(html));
+}
 
 attachEventListenersEducation();
 
@@ -257,12 +201,15 @@ if (fetchedEducation.length > 0) {
 
 function inputEventHandler(el) {
   el.addEventListener("input", (e) => {
+    e.stopImmediatePropagation();
+    console.log(e.target);
     updateInput(e.target, "education", educationArray, "id");
   });
 }
 
 // experienceDiv Functionality
 
+// localStorage.clear();
 let experienceContainerHTML =
   JSON.parse(localStorage.getItem("experienceHTML")) ||
   document.querySelector(".experience-main-container").innerHTML;
@@ -272,11 +219,19 @@ let experienceArray = [experienceValue];
 let fetchedExperience =
   JSON.parse(localStorage.getItem("experience-details")) || experienceArray;
 let expId = fetchedExperience.length;
-
+console.log(expId);
+if (
+  localStorage.getItem("experience-details") === null ||
+  (localStorage.getItem("experience-details") === undefined &&
+    allExperienceDivs.length != 0)
+) {
+  localStorage.setItem("experience-details", JSON.stringify(experienceArray));
+}
 addExperienceBtn.addEventListener("click", (e) => {
   e.preventDefault();
   let fetchedExperienceArray =
     JSON.parse(localStorage.getItem("experience-details")) || experienceArray;
+  experienceValue.id = expId;
   fetchedExperienceArray.push(experienceValue);
   localStorage.setItem(
     "experience-details",
@@ -284,6 +239,7 @@ addExperienceBtn.addEventListener("click", (e) => {
   );
   updateExperienceHtml(expId);
   expId++;
+
   attachEventListenersExperience();
 
   updateContent(
@@ -299,7 +255,9 @@ function attachEventListenersExperience() {
   jobDescriptionInput = document.querySelectorAll(".job-description-input");
   jobStartDate = document.querySelectorAll(".job-start-date-input");
   jobFinishDate = document.querySelectorAll(".job-finish-date-input");
-  removeExperienceBtn = document.querySelectorAll(".remove-experience");
+  removeExperienceBtn = Array.from(
+    document.querySelectorAll(".remove-experience")
+  );
 
   employerInput.forEach((el) => {
     inputEventHandler2(el);
@@ -436,31 +394,11 @@ function attachEventListenersSkills() {
   skillLevel.forEach((el) => {
     el.addEventListener("input", (e) => {
       e.preventDefault();
-      // inputEventHandler4(e.target);
+
       updateInput(e.target, "skills-container", skillsArray, "data-skill-id");
-      console.log(e.target);
-      console.log(e.target.value);
     });
   });
 }
-// function inputEventHandler4(el) {
-//   el.addEventListener("change", (e) => {
-//     console.log(e.target.children);
-//     updateInput(e.target, "skills-container", skillsArray, "data-skill-id");
-//   });
-// }
-
-// function updateInput(target, inputType, arr, id) {
-//   let targetId = target.closest(`.${inputType}`).getAttribute(`${id}`);
-//   let fetchedArray = JSON.parse(localStorage.getItem(`${inputType}`)) || arr;
-//   let updateInfo = {
-//     ...fetchedArray[targetId],
-//     [target.id]: target.value,
-//   };
-//   fetchedArray.splice(targetId, 1, updateInfo);
-
-//   localStorage.setItem(`${inputType}`, JSON.stringify(fetchedArray));
-// }
 
 attachEventListenersSkills();
 

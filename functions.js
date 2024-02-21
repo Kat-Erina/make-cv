@@ -62,6 +62,7 @@ export function updateInput(target, inputType, arr, id) {
 //Experience Funcionality
 
 export const experienceValue = {
+  id: 0,
   ["employer-name"]: "",
   occupation: "",
   ["job-description"]: "",
@@ -118,7 +119,7 @@ export function updateExperienceHtml(id) {
       />
     </div>
   </div>
-  
+  <button class="remove-experience" data-exp-id=${id}>Remove Experience</button>
 </div>`;
   document
     .querySelector(".experience-main-container")
