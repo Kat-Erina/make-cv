@@ -13,7 +13,7 @@
       <h2>Create Resume</h2>
     </header>
     <main>
-      <form>
+      <form id="form">
         <div class="personal-information-main">
           <h3 style="border: 1px solid red">Personal Information</h3>
           <div class="personal-information">
@@ -129,7 +129,9 @@
                 />
               </div>
             </div>
-            <button class="remove-experience" data-exp-id="0">Remove Experience</button>
+            <button class="remove-experience" data-exp-id="0">
+              Remove Experience
+            </button>
           </div>
         </div>
         <button class="add-experience">Add more experience</button>
@@ -138,9 +140,9 @@
           <div class="reference" data-ref-id="0">
             <label for="reference-name"> Reference Name </label>
             <input type="text" placeholder="ref. name" id="reference-name" />
-            <label for="reference-email"> Reference Name </label>
+            <label for="reference-email"> email </label>
             <input type="email" placeholder="ref.email" id="reference-email" />
-            <button>Remove Reference</button>
+            <button class="remove-reference">Remove Reference</>
           </div>
         </div>
         <button class="add-reference">Add more reference</button>
@@ -172,6 +174,8 @@
       </form>
     </main>
     <footer></footer>
+    <script src="https://cdn.jsdelivr.net/npm/uuid@3.4.0/dist/umd/uuidv4.min.js"></script>
+
     <script src="./script.js" type="module"></script>
   </body>
 </html>

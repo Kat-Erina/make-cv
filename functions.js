@@ -47,16 +47,31 @@ export const uploadedPicture = document.querySelector(".uploaded-photo");
 
 export const array = [nameInput, phone, email, address, aboutMe, desiredJob];
 
-export function updateInput(target, inputType, arr, id) {
-  let targetId = target.closest(`.${inputType}`).getAttribute(`${id}`);
-  let fetchedArray = JSON.parse(localStorage.getItem(`${inputType}`)) || arr;
+export function updateInput(target, inputType, identifer) {
+  // let targetId = target.closest(`.${inputType}`).getAttribute(`${id}`);
+  // let fetchedArray2 = JSON.parse(localStorage.getItem(`${inputType}`)) || arr;
+  let fetchedArrayFromStorage = JSON.parse(
+    localStorage.getItem(`${inputType}`)
+  );
+
+  let fetchedArray = Array.from(document.querySelectorAll(`#${identifer}`));
+  console.log(fetchedArray);
+  console.log(fetchedArrayFromStorage);
+  console.log(target);
+  let test = fetchedArray.filter((el) => {
+    return el === target;
+  });
+  console.log(test);
+
+  let ind = fetchedArray.indexOf(test[0]);
+  console.log(ind);
   let updateInfo = {
-    ...fetchedArray[targetId],
+    ...fetchedArrayFromStorage[ind],
     [target.id]: target.value,
   };
-  fetchedArray.splice(targetId, 1, updateInfo);
+  fetchedArrayFromStorage.splice(ind, 1, updateInfo);
 
-  localStorage.setItem(`${inputType}`, JSON.stringify(fetchedArray));
+  localStorage.setItem(`${inputType}`, JSON.stringify(fetchedArrayFromStorage));
 }
 
 //Experience Funcionality
@@ -76,7 +91,7 @@ export function updateRefHTML(id) {
   <input type="text" placeholder="ref. name" id="reference-name" />
   <label for="reference-email"> Reference Name </label>
   <input type="email" placeholder="ref.email" id="reference-email" />
-  <button>Remove Reference</button>
+  <button class="remove-reference">Remove Reference</button>
 </div>`;
 
   document
@@ -85,7 +100,7 @@ export function updateRefHTML(id) {
 }
 
 export function updateExperienceHtml(id) {
-  let experienceDivHtml = `      <div class="experience-details" data-id=${id}>
+  let experienceDivHtml = `      <div class="experience-details" data-id=${id}">
   <label for="employer-name">Company Name</label>
   <br />
   <input type="text" id="employer-name" class="employer-name-input" />
