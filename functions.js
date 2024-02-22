@@ -1,5 +1,5 @@
-export function updateEducationContainerHtml(id) {
-  let educationDivHTML = ` <div class="education" id=${id}>
+export function updateEducationContainerHtml() {
+  let educationDivHTML = ` <div class="education" >
               
   <label for="university">School/College/University</label>
   <br />
@@ -20,7 +20,7 @@ export function updateEducationContainerHtml(id) {
       <input type="date" id="finish-date" class="finish-date-input" />
     </div>
   </div>
-  <button class="education-btn" data-edu-id=${id}>Remove</button>
+  <button class="education-btn" >Remove</button>
   </div>`;
 
   document
@@ -29,7 +29,6 @@ export function updateEducationContainerHtml(id) {
 }
 
 export const educationValue = {
-  id: 0,
   university: "",
   specialty: "",
   ["start-date"]: "",
@@ -48,23 +47,17 @@ export const uploadedPicture = document.querySelector(".uploaded-photo");
 export const array = [nameInput, phone, email, address, aboutMe, desiredJob];
 
 export function updateInput(target, inputType, identifer) {
-  // let targetId = target.closest(`.${inputType}`).getAttribute(`${id}`);
-  // let fetchedArray2 = JSON.parse(localStorage.getItem(`${inputType}`)) || arr;
   let fetchedArrayFromStorage = JSON.parse(
     localStorage.getItem(`${inputType}`)
   );
-
   let fetchedArray = Array.from(document.querySelectorAll(`#${identifer}`));
-  console.log(fetchedArray);
-  console.log(fetchedArrayFromStorage);
-  console.log(target);
+
   let test = fetchedArray.filter((el) => {
     return el === target;
   });
-  console.log(test);
 
   let ind = fetchedArray.indexOf(test[0]);
-  console.log(ind);
+
   let updateInfo = {
     ...fetchedArrayFromStorage[ind],
     [target.id]: target.value,
@@ -85,8 +78,8 @@ export const experienceValue = {
   ["job-finish-date"]: "",
 };
 
-export function updateRefHTML(id) {
-  let referenceHTML = ` <div class="reference" data-ref-id=${id}>
+export function updateRefHTML() {
+  let referenceHTML = ` <div class="reference" >
   <label for="reference-name"> Reference Name </label>
   <input type="text" placeholder="ref. name" id="reference-name" />
   <label for="reference-email"> Reference Name </label>
@@ -99,8 +92,8 @@ export function updateRefHTML(id) {
     .insertAdjacentHTML("beforeEnd", referenceHTML);
 }
 
-export function updateExperienceHtml(id) {
-  let experienceDivHtml = `      <div class="experience-details" data-id=${id}">
+export function updateExperienceHtml() {
+  let experienceDivHtml = `      <div class="experience-details" ">
   <label for="employer-name">Company Name</label>
   <br />
   <input type="text" id="employer-name" class="employer-name-input" />
@@ -134,7 +127,7 @@ export function updateExperienceHtml(id) {
       />
     </div>
   </div>
-  <button class="remove-experience" data-exp-id=${id}>Remove Experience</button>
+  <button class="remove-experience" >Remove Experience</button>
 </div>`;
   document
     .querySelector(".experience-main-container")
@@ -178,9 +171,9 @@ export let skillValue = {
 
 // html for skills container
 
-export function updateSkillsHtml(id) {
+export function updateSkillsHtml() {
   let skillsDivHTML = `
-  <div class="skills-container" data-skill-id=${id}>
+  <div class="skills-container" >
   <div class="skill">
     <label for="skill-name">Skill</label>
     <input
@@ -200,7 +193,7 @@ export function updateSkillsHtml(id) {
       <option data-option-id="5">Professional</option>
     </select>
   </div>
-  <button>Remove Skill</button>
+  <button class="remove-Skill">Remove Skill</button>
 </div>`;
   document
     .querySelector(".skills-main-container")
