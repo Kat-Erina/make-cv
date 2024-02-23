@@ -1,3 +1,4 @@
+"use strict";
 export function updateEducationContainerHtml() {
   let educationDivHTML = ` <div class="education" >
               
@@ -35,13 +36,12 @@ export const educationValue = {
   ["finish-date"]: "",
 };
 
-export const nameInput = document.querySelector(".name-input");
-export const phone = document.querySelector(".phone-input");
-export const email = document.querySelector(".email-input");
-export const address = document.querySelector(".address-input");
-export const aboutMe = document.querySelector(".about-me-input");
-export const desiredJob = document.querySelector(".desired-job-input");
-export const addEducationBtn = document.querySelector(".add-education");
+const nameInput = document.querySelector(".name-input");
+const phone = document.querySelector(".phone-input");
+const email = document.querySelector(".email-input");
+const address = document.querySelector(".address-input");
+const aboutMe = document.querySelector(".about-me-input");
+const desiredJob = document.querySelector(".desired-job-input");
 export const uploadedPicture = document.querySelector(".uploaded-photo");
 
 export const array = [nameInput, phone, email, address, aboutMe, desiredJob];
@@ -55,9 +55,7 @@ export function updateInput(target, inputType, identifer) {
   let test = fetchedArray.filter((el) => {
     return el === target;
   });
-
   let ind = fetchedArray.indexOf(test[0]);
-
   let updateInfo = {
     ...fetchedArrayFromStorage[ind],
     [target.id]: target.value,
@@ -164,7 +162,7 @@ export const refValue = {
 
 // skill container functionality
 
-export let skillValue = {
+export const skillValue = {
   ["level-label"]: "",
   ["skill-name"]: "",
 };

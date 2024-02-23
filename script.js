@@ -1,15 +1,12 @@
 "use strict";
-// DOM ELEMENTS
 import {
   updateEducationContainerHtml,
   updateInput,
   educationValue,
-  addEducationBtn,
   array,
   experienceValue,
   updateExperienceHtml,
   updateContent,
-  desiredJob,
   uploadedPicture,
   uploadPictureFnc,
   refValue,
@@ -29,39 +26,60 @@ const personObj = JSON.parse(localStorage.getItem("person")) || {
 };
 
 // DOM Elements for EducationSection
-let universityInputs = document.querySelectorAll(".university-input");
-let specialtyInput = document.querySelectorAll(".specialty-input");
-let schoolStartDate = document.querySelectorAll(".start-date-input");
-let schoolFinishDate = document.querySelectorAll(".finish-date-input");
-let educationDeleteBtns = Array.from(
-  document.querySelectorAll(".education-btn")
-);
-let allEducationDivs = Array.from(document.querySelectorAll(".education"));
+
+let educationArray = [educationValue];
+let educationObj = {
+  universityInputs: document.querySelectorAll(".university-input"),
+  specialtyInput: document.querySelectorAll(".specialty-input"),
+  schoolStartDate: document.querySelectorAll(".start-date-input"),
+  schoolFinishDate: document.querySelectorAll(".finish-date-input"),
+  educationDeleteBtns: Array.from(document.querySelectorAll(".education-btn")),
+  allEducationDivs: Array.from(document.querySelectorAll(".education")),
+  addEducationBtn: document.querySelector(".add-education"),
+  educationContainerHTML:
+    JSON.parse(localStorage.getItem("educationHTML")) ||
+    document.querySelector(".education-main-container").innerHTML,
+  fetchedEducation:
+    JSON.parse(localStorage.getItem("education")) || educationArray,
+  optionsEducation: {
+    class: ".education-btn",
+    prop1: "education",
+    prop2: "education",
+    prop3: ".education-main-container",
+    prop4: "educationHTML",
+  },
+};
 
 //Dom Elements for Experience Section
 
-let employerInput = document.querySelectorAll(".employer-name-input");
-let occupationInput = document.querySelectorAll(".occupation-input");
-let jobDescriptionInput = document.querySelectorAll(".job-description-input");
-let jobStartDate = document.querySelectorAll(".job-start-date-input");
-let jobFinishDate = document.querySelectorAll(".job-finish-date-input");
-let removeExperienceBtn = Array.from(
-  document.querySelectorAll(".remove-experience")
-);
-let allExperienceDivs = Array.from(
-  document.querySelectorAll(".experience-details")
-);
-// localStorage.clear();
-const addExperienceBtn = document.querySelector(".add-experience");
+let experienceArray = [experienceValue];
+let experienceObj = {
+  employerInput: document.querySelectorAll(".employer-name-input"),
+  occupationInput: document.querySelectorAll(".occupation-input"),
+  jobDescriptionInput: document.querySelectorAll(".job-description-input"),
+  jobStartDate: document.querySelectorAll(".job-start-date-input"),
+  jobFinishDate: document.querySelectorAll(".job-finish-date-input"),
+  removeExperienceBtn: Array.from(
+    document.querySelectorAll(".remove-experience")
+  ),
+  allExperienceDivs: Array.from(
+    document.querySelectorAll(".experience-details")
+  ),
+  addExperienceBtn: document.querySelector(".add-experience"),
+  experienceContainerHTML:
+    JSON.parse(localStorage.getItem("experienceHTML")) ||
+    document.querySelector(".experience-main-container").innerHTML,
+  fetchedExperience:
+    JSON.parse(localStorage.getItem("experience-details")) || experienceArray,
+  optionsExperience: {
+    class: ".remove-experience",
+    prop1: "experience-details",
+    prop2: "experience-details",
+    prop3: ".experience-main-container",
+    prop4: "experienceHTML",
+  },
+};
 
-// Dom Elements for Reference Container
-let allReferenceContainer = Array.from(document.querySelectorAll(".reference"));
-let refName = document.querySelectorAll("#reference-name");
-let refEmail = document.querySelectorAll("#reference-email");
-let addRefBtn = document.querySelector(".add-reference");
-let removeReferenceBtn = Array.from(
-  document.querySelectorAll(".remove-reference")
-);
 // personal information functionality
 
 function updateLocalStorage(target) {
@@ -78,90 +96,78 @@ array.forEach((element) => {
   });
 });
 
-//
-let educationArray = [educationValue];
-
 if (
   localStorage.getItem("education") === null ||
   (localStorage.getItem("education") === undefined &&
-    allEducationDivs.length != 0)
+    educationObj.allEducationDivs.length != 0)
 ) {
   localStorage.setItem("education", JSON.stringify(educationArray));
 }
 
-let educationContainerHTML =
-  JSON.parse(localStorage.getItem("educationHTML")) ||
-  document.querySelector(".education-main-container").innerHTML;
-
 document.querySelector(".education-main-container").innerHTML =
-  educationContainerHTML;
-let fetchedEducation =
-  JSON.parse(localStorage.getItem("education")) || educationArray;
+  educationObj.educationContainerHTML;
 
-addEducationBtn.addEventListener("click", (e) => {
+educationObj.addEducationBtn.addEventListener("click", (e) => {
   e.preventDefault();
   let fetchedEducationArray =
     JSON.parse(localStorage.getItem("education")) || educationArray;
-
   fetchedEducationArray.push(educationValue);
   localStorage.setItem("education", JSON.stringify(fetchedEducationArray));
   updateEducationContainerHtml();
-
   attachEventListenersEducation();
-
   updateContent(
-    educationContainerHTML,
+    educationObj.educationContainerHTML,
     "education-main-container",
     "educationHTML"
   );
 });
 
 function attachEventListenersEducation() {
-  universityInputs = document.querySelectorAll(".university-input");
-  specialtyInput = document.querySelectorAll(".specialty-input");
-  schoolStartDate = document.querySelectorAll(".start-date-input");
-  schoolFinishDate = document.querySelectorAll(".finish-date-input");
-  educationDeleteBtns = Array.from(document.querySelectorAll(".education-btn"));
-  allEducationDivs = Array.from(document.querySelectorAll(".education"));
-
-  universityInputs.forEach((el) => {
+  educationObj.universityInputs =
+    document.querySelectorAll(".university-input");
+  educationObj.specialtyInput = document.querySelectorAll(".specialty-input");
+  educationObj.schoolStartDate = document.querySelectorAll(".start-date-input");
+  educationObj.schoolFinishDate =
+    document.querySelectorAll(".finish-date-input");
+  educationObj.educationDeleteBtns = Array.from(
+    document.querySelectorAll(".education-btn")
+  );
+  educationObj.allEducationDivs = Array.from(
+    document.querySelectorAll(".education")
+  );
+  educationArray = [educationValue];
+  educationObj.universityInputs.forEach((el) => {
     el.addEventListener("input", (event) => {
       event.stopImmediatePropagation();
-
       updateInput(event.target, "education", "university");
     });
   });
-  specialtyInput.forEach((el) => {
+  educationObj.specialtyInput.forEach((el) => {
     el.addEventListener("input", (event) => {
       event.stopImmediatePropagation();
-
       updateInput(event.target, "education", "specialty");
     });
   });
-  schoolStartDate.forEach((el) => {
+  educationObj.schoolStartDate.forEach((el) => {
     el.addEventListener("input", (event) => {
       event.stopImmediatePropagation();
       updateInput(event.target, "education", "start-date");
     });
   });
-  schoolFinishDate.forEach((el) => {
+  educationObj.schoolFinishDate.forEach((el) => {
     el.addEventListener("input", (event) => {
       event.stopImmediatePropagation();
-
       updateInput(event.target, "education", "finish-date");
     });
   });
-
-  educationDeleteBtns.forEach((btn) => {
+  educationObj.educationDeleteBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopImmediatePropagation();
-
-      removeItem(e.target, optionsEducation);
+      removeItem(e.target, educationObj.optionsEducation);
     });
   });
 }
-
 function removeItem(target, obj) {
   let allBtns = document.querySelectorAll(`${obj.class}`);
   let btnArray = Array.from(allBtns);
@@ -178,44 +184,33 @@ function removeItem(target, obj) {
   let html = document.querySelector(`${obj.prop3}`).innerHTML;
   localStorage.setItem(`${obj.prop4}`, JSON.stringify(html));
 }
-
-let optionsEducation = {
-  class: ".education-btn",
-  prop1: "education",
-  prop2: "education",
-  prop3: ".education-main-container",
-  prop4: "educationHTML",
-};
-
 attachEventListenersEducation();
 
-if (fetchedEducation.length > 0) {
-  for (let i = 0; i < fetchedEducation.length; i++) {
-    universityInputs[i].value = fetchedEducation[i].university;
-    specialtyInput[i].value = fetchedEducation[i].specialty;
-    schoolStartDate[i].value = fetchedEducation[i]["start-date"];
-    schoolFinishDate[i].value = fetchedEducation[i]["finish-date"];
+if (educationObj.fetchedEducation.length > 0) {
+  for (let i = 0; i < educationObj.fetchedEducation.length; i++) {
+    educationObj.universityInputs[i].value =
+      educationObj.fetchedEducation[i].university;
+    educationObj.specialtyInput[i].value =
+      educationObj.fetchedEducation[i].specialty;
+    educationObj.schoolStartDate[i].value =
+      educationObj.fetchedEducation[i]["start-date"];
+    educationObj.schoolFinishDate[i].value =
+      educationObj.fetchedEducation[i]["finish-date"];
   }
 }
 
-let experienceContainerHTML =
-  JSON.parse(localStorage.getItem("experienceHTML")) ||
-  document.querySelector(".experience-main-container").innerHTML;
 document.querySelector(".experience-main-container").innerHTML =
-  experienceContainerHTML;
-let experienceArray = [experienceValue];
-let fetchedExperience =
-  JSON.parse(localStorage.getItem("experience-details")) || experienceArray;
+  experienceObj.experienceContainerHTML;
 
 if (
   localStorage.getItem("experience-details") === null ||
   (localStorage.getItem("experience-details") === undefined &&
-    allExperienceDivs.length != 0)
+    experienceObj.allExperienceDivs.length != 0)
 ) {
   localStorage.setItem("experience-details", JSON.stringify(experienceArray));
 }
 
-addExperienceBtn.addEventListener("click", (e) => {
+experienceObj.addExperienceBtn.addEventListener("click", (e) => {
   e.preventDefault();
   let fetchedExperienceArray =
     JSON.parse(localStorage.getItem("experience-details")) || experienceArray;
@@ -225,85 +220,89 @@ addExperienceBtn.addEventListener("click", (e) => {
     JSON.stringify(fetchedExperienceArray)
   );
   updateExperienceHtml();
-
   attachEventListenersExperience();
-
   updateContent(
-    experienceContainerHTML,
+    experienceObj.experienceContainerHTML,
     "experience-main-container",
     "experienceHTML"
   );
 });
 
-let optionsExperience = {
-  class: ".remove-experience",
-  prop1: "experience-details",
-  prop2: "experience-details",
-  array: fetchedExperience,
-  prop3: ".experience-main-container",
-  prop4: "experienceHTML",
-};
-
-// localStorage.clear();
 function attachEventListenersExperience() {
-  employerInput = document.querySelectorAll(".employer-name-input");
-  occupationInput = document.querySelectorAll(".occupation-input");
-  jobDescriptionInput = document.querySelectorAll(".job-description-input");
-  jobStartDate = document.querySelectorAll(".job-start-date-input");
-  jobFinishDate = document.querySelectorAll(".job-finish-date-input");
-  removeExperienceBtn = Array.from(
+  experienceObj.employerInput = document.querySelectorAll(
+    ".employer-name-input"
+  );
+  experienceObj.occupationInput =
+    document.querySelectorAll(".occupation-input");
+  experienceObj.jobDescriptionInput = document.querySelectorAll(
+    ".job-description-input"
+  );
+  experienceObj.jobStartDate = document.querySelectorAll(
+    ".job-start-date-input"
+  );
+  experienceObj.jobFinishDate = document.querySelectorAll(
+    ".job-finish-date-input"
+  );
+  experienceObj.removeExperienceBtn = Array.from(
     document.querySelectorAll(".remove-experience")
   );
-  allExperienceDivs = Array.from(
+  experienceObj.allExperienceDivs = Array.from(
     document.querySelectorAll(".experience-details")
   );
-  employerInput.forEach((el) => {
+  experienceArray = [experienceValue];
+
+  experienceObj.employerInput.forEach((el) => {
     el.addEventListener("input", (e) => {
       e.stopImmediatePropagation();
       updateInput(e.target, "experience-details", "employer-name");
     });
   });
-  occupationInput.forEach((el) => {
+  experienceObj.occupationInput.forEach((el) => {
     el.addEventListener("input", (e) => {
       e.stopImmediatePropagation();
       updateInput(e.target, "experience-details", "occupation");
     });
   });
-  jobStartDate.forEach((el) => {
+  experienceObj.jobStartDate.forEach((el) => {
     el.addEventListener("input", (e) => {
       e.stopImmediatePropagation();
       updateInput(e.target, "experience-details", "job-start-date");
     });
   });
-  jobFinishDate.forEach((el) => {
+  experienceObj.jobFinishDate.forEach((el) => {
     el.addEventListener("input", (e) => {
       e.stopImmediatePropagation();
       updateInput(e.target, "experience-details", "job-finish-date");
     });
   });
-  jobDescriptionInput.forEach((el) => {
+  experienceObj.jobDescriptionInput.forEach((el) => {
     el.addEventListener("input", (e) => {
       e.stopImmediatePropagation();
       updateInput(e.target, "experience-details", "job-description");
     });
   });
-  removeExperienceBtn.forEach((el) => {
+  experienceObj.removeExperienceBtn.forEach((el) => {
     el.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopImmediatePropagation();
-      removeItem(e.target, optionsExperience);
+      removeItem(e.target, experienceObj.optionsExperience);
     });
   });
 }
 
 attachEventListenersExperience();
 
-for (let i = 0; i < fetchedExperience.length; i++) {
-  employerInput[i].value = fetchedExperience[i]["employer-name"];
-  occupationInput[i].value = fetchedExperience[i].occupation;
-  jobDescriptionInput[i].value = fetchedExperience[i]["job-description"];
-  jobStartDate[i].value = fetchedExperience[i]["job-start-date"];
-  jobFinishDate[i].value = fetchedExperience[i]["job-finish-date"];
+for (let i = 0; i < experienceObj.fetchedExperience.length; i++) {
+  experienceObj.employerInput[i].value =
+    experienceObj.fetchedExperience[i]["employer-name"];
+  experienceObj.occupationInput[i].value =
+    experienceObj.fetchedExperience[i].occupation;
+  experienceObj.jobDescriptionInput[i].value =
+    experienceObj.fetchedExperience[i]["job-description"];
+  experienceObj.jobStartDate[i].value =
+    experienceObj.fetchedExperience[i]["job-start-date"];
+  experienceObj.jobFinishDate[i].value =
+    experienceObj.fetchedExperience[i]["job-finish-date"];
 }
 
 //  photo upload functionality
@@ -324,23 +323,39 @@ photo.addEventListener("change", (e) => {
 // Reference functionality
 
 let refArray = [refValue];
+
+let referenceObj = {
+  allReferenceContainer: Array.from(document.querySelectorAll(".reference")),
+  refName: document.querySelectorAll("#reference-name"),
+  refEmail: document.querySelectorAll("#reference-email"),
+  addRefBtn: document.querySelector(".add-reference"),
+  removeReferenceBtn: Array.from(
+    document.querySelectorAll(".remove-reference")
+  ),
+  refContainerHTML:
+    JSON.parse(localStorage.getItem("refHtml")) ||
+    document.querySelector(".references-main-container").innerHTML,
+  fetchedReferences: JSON.parse(localStorage.getItem("reference")) || refArray,
+  optionsReference: {
+    class: ".remove-reference",
+    prop1: "reference",
+    prop2: "reference",
+    prop3: ".references-main-container",
+    prop4: "refHtml",
+  },
+};
+
 if (
   localStorage.getItem("reference") === null ||
   (localStorage.getItem("reference") === undefined &&
-    allReferenceContainer.length != 0)
+    referenceObj.allReferenceContainer.length != 0)
 ) {
   localStorage.setItem("reference", JSON.stringify(refArray));
 }
-let refContainerHTML =
-  JSON.parse(localStorage.getItem("refHtml")) ||
-  document.querySelector(".references-main-container").innerHTML;
 document.querySelector(".references-main-container").innerHTML =
-  refContainerHTML;
+  referenceObj.refContainerHTML;
 
-let fetchedReferences =
-  JSON.parse(localStorage.getItem("reference")) || refArray;
-
-addRefBtn.addEventListener("click", (e) => {
+referenceObj.addRefBtn.addEventListener("click", (e) => {
   e.preventDefault();
   let fetchedRefAArray =
     JSON.parse(localStorage.getItem("reference")) || refArray;
@@ -348,124 +363,127 @@ addRefBtn.addEventListener("click", (e) => {
   localStorage.setItem("reference", JSON.stringify(fetchedRefAArray));
   updateRefHTML();
   attachEventListenersReference();
-  updateContent(refContainerHTML, "references-main-container", "refHtml");
+  updateContent(
+    referenceObj.refContainerHTML,
+    "references-main-container",
+    "refHtml"
+  );
 });
 
-let optionsReference = {
-  class: ".remove-reference",
-  prop1: "reference",
-  prop2: "reference",
-  array: fetchedExperience,
-  prop3: ".references-main-container",
-  prop4: "refHtml",
-};
-
 function attachEventListenersReference() {
-  refName = document.querySelectorAll("#reference-name");
-  refEmail = document.querySelectorAll("#reference-email");
-  removeReferenceBtn = Array.from(
+  referenceObj.refName = document.querySelectorAll("#reference-name");
+  referenceObj.refEmail = document.querySelectorAll("#reference-email");
+  referenceObj.removeReferenceBtn = Array.from(
     document.querySelectorAll(".remove-reference")
   );
-  refName.forEach((el) => {
+  referenceObj.refName.forEach((el) => {
     el.addEventListener("input", (event) => {
       event.stopImmediatePropagation();
       updateInput(event.target, "reference", "reference-name");
     });
   });
-  refEmail.forEach((el) => {
+  referenceObj.refEmail.forEach((el) => {
     el.addEventListener("input", (event) => {
       event.stopImmediatePropagation();
       updateInput(event.target, "reference", "reference-email");
     });
   });
-  removeReferenceBtn.forEach((el) => {
+  referenceObj.removeReferenceBtn.forEach((el) => {
     el.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopImmediatePropagation();
-      removeItem(e.target, optionsReference);
+      removeItem(e.target, referenceObj.optionsReference);
     });
   });
 }
 
 attachEventListenersReference();
 
-for (let i = 0; i < fetchedReferences.length; i++) {
-  refName[i].value = fetchedReferences[i]["reference-name"];
-  refEmail[i].value = fetchedReferences[i]["reference-email"];
+for (let i = 0; i < referenceObj.fetchedReferences.length; i++) {
+  referenceObj.refName[i].value =
+    referenceObj.fetchedReferences[i]["reference-name"];
+  referenceObj.refEmail[i].value =
+    referenceObj.fetchedReferences[i]["reference-email"];
 }
 
-//
-let skillLevel = document.querySelector(".level-select");
-let skillName = document.querySelector("#skill-name");
+// Skills Functionality
+
 let skillsArray = [skillValue];
-let allSkillsDivs = Array.from(document.querySelectorAll(".skills-container"));
-let skillsDeleteBtns = Array.from(document.querySelectorAll(".remove-Skill"));
+let skillsObject = {
+  skillLevel: document.querySelector(".level-select"),
+  skillName: document.querySelector("#skill-name"),
+  allSkillsDivs: Array.from(document.querySelectorAll(".skills-container")),
+  skillsDeleteBtns: Array.from(document.querySelectorAll(".remove-Skill")),
+  skillsContainerHTML:
+    JSON.parse(localStorage.getItem("skillHtml")) ||
+    document.querySelector(".skills-main-container").innerHTML,
+  fetchedSkills:
+    JSON.parse(localStorage.getItem("skills-container")) || skillsArray,
+  addSkillBtn: document.querySelector(".add-skill"),
+  optionsSkill: {
+    class: ".remove-Skill",
+    prop1: "skills-container",
+    prop2: "skills-container",
+    prop3: ".skills-main-container",
+    prop4: "skillHtml",
+  },
+};
 
 if (
   localStorage.getItem("skills-container") === null ||
   (localStorage.getItem("skills-container") === undefined &&
-    allSkillsDivs.length != 0)
+    skillsObject.allSkillsDivs.length != 0)
 ) {
   localStorage.setItem("skills-container", JSON.stringify(skillsArray));
 }
 
-let skillsContainerHTML =
-  JSON.parse(localStorage.getItem("skillHtml")) ||
-  document.querySelector(".skills-main-container").innerHTML;
 document.querySelector(".skills-main-container").innerHTML =
-  skillsContainerHTML;
-
-let fetchedSkills =
-  JSON.parse(localStorage.getItem("skills-container")) || skillsArray;
-
-let addSkillBtn = document.querySelector(".add-skill");
-
-let optionsSkill = {
-  class: ".remove-Skill",
-  prop1: "skills-container",
-  prop2: "skills-container",
-  prop3: ".skills-main-container",
-  prop4: "skillHtml",
-};
+  skillsObject.skillsContainerHTML;
+skillsObject.addSkillBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  let fetchedSkillsAArray =
+    JSON.parse(localStorage.getItem("skills-container")) || skillsArray;
+  fetchedSkillsAArray.push(skillValue);
+  localStorage.setItem("skills-container", JSON.stringify(fetchedSkillsAArray));
+  updateSkillsHtml();
+  attachEventListenersSkills();
+  updateContent(
+    skillsObject.skillsContainerHTML,
+    "skills-main-container",
+    "skillHtml"
+  );
+});
 
 function attachEventListenersSkills() {
-  skillName = document.querySelectorAll("#skill-name");
-  skillLevel = document.querySelectorAll(".level-select");
-  skillsDeleteBtns = Array.from(document.querySelectorAll(".remove-Skill"));
-  skillName.forEach((el) => {
+  skillsObject.skillName = document.querySelectorAll("#skill-name");
+  skillsObject.skillLevel = document.querySelectorAll(".level-select");
+  skillsObject.skillsDeleteBtns = Array.from(
+    document.querySelectorAll(".remove-Skill")
+  );
+  skillsObject.skillName.forEach((el) => {
     el.addEventListener("input", (e) => {
       updateInput(e.target, "skills-container", "skill-name");
     });
   });
-  skillLevel.forEach((el) => {
+  skillsObject.skillLevel.forEach((el) => {
     el.addEventListener("input", (e) => {
       e.preventDefault();
       updateInput(e.target, "skills-container", "level-label");
     });
   });
-  skillsDeleteBtns.forEach((el) => {
+  skillsObject.skillsDeleteBtns.forEach((el) => {
     el.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopImmediatePropagation();
-      removeItem(e.target, optionsSkill);
+      removeItem(e.target, skillsObject.optionsSkill);
     });
   });
 }
 
 attachEventListenersSkills();
 
-addSkillBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  let fetchedRefAArray =
-    JSON.parse(localStorage.getItem("skills-container")) || skillsArray;
-  fetchedRefAArray.push(skillValue);
-  localStorage.setItem("skills-container", JSON.stringify(fetchedRefAArray));
-  updateSkillsHtml();
-  attachEventListenersSkills();
-  updateContent(skillsContainerHTML, "skills-main-container", "skillHtml");
-});
-
-for (let i = 0; i < fetchedSkills.length; i++) {
-  skillName[i].value = fetchedSkills[i]["skill-name"];
-  skillLevel[i].value = fetchedSkills[i]["level-label"];
+for (let i = 0; i < skillsObject.fetchedSkills.length; i++) {
+  skillsObject.skillName[i].value = skillsObject.fetchedSkills[i]["skill-name"];
+  skillsObject.skillLevel[i].value =
+    skillsObject.fetchedSkills[i]["level-label"];
 }
