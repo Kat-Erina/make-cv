@@ -38,15 +38,25 @@ export const educationValue = {
   ["finish-date"]: "",
 };
 
-const nameInput = document.querySelector(".name-input");
-const phone = document.querySelector(".phone-input");
-const email = document.querySelector(".email-input");
-const address = document.querySelector(".address-input");
-const aboutMe = document.querySelector(".about-me-input");
-const desiredJob = document.querySelector(".desired-job-input");
-export const uploadedPicture = document.querySelector(".uploaded-photo");
+export const personObject = {
+  nameInput: document.querySelector(".name-input"),
+  phone: document.querySelector(".phone-input"),
+  email: document.querySelector(".email-input"),
+  address: document.querySelector(".address-input"),
+  aboutMe: document.querySelector(".about-me-input"),
+  desiredJob: document.querySelector(".desired-job-input"),
+  uploadedPicture: document.querySelector(".uploaded-photo"),
+  uploadedPictureContainer: document.querySelector(".uploaded-photo-container"),
+};
 
-export const array = [nameInput, phone, email, address, aboutMe, desiredJob];
+export const array = [
+  personObject.nameInput,
+  personObject.phone,
+  personObject.email,
+  personObject.address,
+  personObject.aboutMe,
+  personObject.desiredJob,
+];
 
 export function updateInput(target, inputType, identifer) {
   let fetchedArrayFromStorage = JSON.parse(

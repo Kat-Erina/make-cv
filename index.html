@@ -78,6 +78,7 @@
           <div class="photo-container">
             <label for="photo" class="photo-label">Upload Photo</label>
             <input type="file" id="photo" accept="image/*" />
+            <button class="clear-photo">Clear Photo</button>
           </div>
         </div>
         <hr />
@@ -243,12 +244,16 @@
         </button>
       </form>
     </main>
-    <footer></footer>
+    <footer>
+      <a class="preview">Preview</a>
+    </footer>
     <script
       src="https://kit.fontawesome.com/5dc4c20cc7.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="./script.js" type="module"></script>
   </body>
 </html>

@@ -7,15 +7,14 @@ import {
   experienceValue,
   updateExperienceHtml,
   updateContent,
-  uploadedPicture,
   uploadPictureFnc,
   refValue,
   updateRefHTML,
   skillValue,
   updateSkillsHtml,
+  personObject,
 } from "./functions.js";
 
-// localStorage.clear();
 const personObj = JSON.parse(localStorage.getItem("person")) || {
   nameInput: "",
   address: "",
@@ -305,17 +304,13 @@ for (let i = 0; i < experienceObj.fetchedExperience.length; i++) {
   experienceObj.jobFinishDate[i].value =
     experienceObj.fetchedExperience[i]["job-finish-date"];
 }
-// localStorage.clear();
+
 //  photo upload functionality
 let src = JSON.parse(localStorage.getItem("image")) || "";
 let photo = document.querySelector("#photo");
-console.log(src);
+// console.log(src);
 if (src !== "") {
-  console.log("k");
-  console.log(src.length);
-  document.querySelector(
-    ".uploaded-photo-container"
-  ).innerHTML = `<img class="uploaded-photo" alt="photo" src=${src} />`;
+  personObject.uploadedPictureContainer.innerHTML = `<img class="uploaded-photo" alt="photo" src=${src} />`;
 }
 
 photo.addEventListener("change", (e) => {
@@ -496,3 +491,9 @@ for (let i = 0; i < skillsObject.fetchedSkills.length; i++) {
   skillsObject.skillLevel[i].value =
     skillsObject.fetchedSkills[i]["level-label"];
 }
+
+document.querySelector(".clear-photo ").addEventListener("click", (e) => {
+  e.preventDefault();
+  personObject.uploadedPictureContainer.innerHTML = "";
+  localStorage.setItem("image", JSON.stringify(""));
+});

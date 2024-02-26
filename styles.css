@@ -27,13 +27,17 @@ h2 {
 }
 
 main {
-  padding: 2rem 1.2rem 2rem 1.2rem;
-  background-color: #d4e4ee;
+  /* padding: 2rem 1.2rem 2rem 1.2rem; */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+form {
+  padding: 2rem 1.2rem 2rem 1.2rem;
+  background-color: #d4e4ee;
+  width: 100%;
+}
 /* // styling personal information */
 .personal-information-main {
   display: flex;
@@ -92,6 +96,7 @@ textarea:focus {
   display: flex;
   flex-direction: row;
   padding: 1rem;
+  justify-content: space-between;
 }
 #photo {
   display: none;
@@ -102,8 +107,7 @@ textarea:focus {
   margin: 0.6rem 0 0.8rem 0;
   width: 100%;
   font-size: 1rem;
-
-  border: 1px solid rgb(98, 96, 96);
+border: 1px solid rgb(98, 96, 96);
   border-radius: 5px;
   transition: all 0.3s ease-in;
 }
@@ -115,11 +119,13 @@ textarea:focus {
 .education-btn,
 .remove-experience,
 .remove-reference,
-.remove-Skill {
+.remove-Skill,
+.preview,
+.clear-photo {
   display: inline-block;
   padding: 10px 10px;
   padding-top: 10px;
-  background-color: #3498db; /* Set your desired background color */
+  background-color: #3498db;
   color: #fff;
   cursor: pointer;
   border-radius: 5px;
@@ -129,8 +135,10 @@ textarea:focus {
   margin-bottom: 0.8rem;
   margin-top: 0.8rem;
 }
-
-/* istileba ganatleba */
+.clear-photo {
+  font-size: 16px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
 
 .title {
   margin-bottom: 0.8rem;
@@ -166,12 +174,24 @@ textarea:focus {
 .remove-experience,
 .remove-reference,
 .remove-Skill {
-  background-color: rgb(182, 73, 73); /* Set your desired background color */
+  background-color: rgb(182, 73, 73);
   border: none;
   margin: 0.8rem 0 0.8rem 0;
 }
 
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+.preview {
+  float: right;
+  margin-right: 10%;
+}
+@media screen and (min-width: 650px) {
+  .uploaded-photo-container {
+    height: 250px;
+  }
+}
+@media screen and (min-width: 1023px) {
+  form {
+    width: 50%;
+  }
   .university-input,
   .specialty-input,
   .employer-name-input,
@@ -179,9 +199,7 @@ textarea:focus {
   .job-description-input {
     width: 75%;
   }
-  .job-description-input {
-    height: 4rem;
-  }
+
   .reference {
     flex-direction: row;
     justify-content: space-around;
@@ -193,18 +211,21 @@ textarea:focus {
     width: 50%;
   }
   .uploaded-photo-container {
-    height: 320px;
+    height: 200px;
     margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 2px solid red;
   }
 }
 
-@media screen and (min-width: 1023px) {
-  form {
-    width: 50%;
-    background-color: #3498db;
-  }
+@media screen and (min-width: 1400px) {
   .uploaded-photo-container {
-    height: 320px;
+    height: 300px;
     margin-left: 20px;
+  }
+  .preview {
+    margin-right: 10%;
   }
 }
