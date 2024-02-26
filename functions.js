@@ -4,11 +4,11 @@ export function updateEducationContainerHtml() {
               
   <label for="university">School/College/University</label>
   <br />
-  <input type="text" id="university" class="university-input" />
+  <input type="text" id="university" class="university-input"  placeholder="school/college/University" />
   <br />
   <label for="specialty">Specialty</label>
   <br />
-  <input type="text" id="specialty" class="specialty-input" />
+  <input type="text" id="specialty" class="specialty-input"  placeholder="specialty" />
   <div class="date-container">
     <div>
       <label for="start-date">Started...</label>
@@ -21,8 +21,10 @@ export function updateEducationContainerHtml() {
       <input type="date" id="finish-date" class="finish-date-input" />
     </div>
   </div>
-  <button class="education-btn" >Remove</button>
-  </div>`;
+  <button class="education-btn" ><i class="fa-regular fa-trash-can"></i>Remove</button>
+  <hr />
+  </div>
+   `;
 
   document
     .querySelector(".education-main-container")
@@ -78,11 +80,16 @@ export const experienceValue = {
 
 export function updateRefHTML() {
   let referenceHTML = ` <div class="reference" >
-  <label for="reference-name"> Reference Name </label>
-  <input type="text" placeholder="ref. name" id="reference-name" />
-  <label for="reference-email"> Reference Name </label>
-  <input type="email" placeholder="ref.email" id="reference-email" />
-  <button class="remove-reference">Remove Reference</button>
+  <label for="reference-name"> Referent's Name </label>
+  <br />
+  <input type="text" placeholder="Referent's Name" id="reference-name" />
+  <br />
+  <label for="reference-email">Contact Information </label>
+  <br />
+  <input type="email" placeholder="email, phone number, etc." id="reference-email" />
+  <br />
+  <button class="remove-reference"><i class="fa-regular fa-trash-can"></i>Remove Reference</button>
+  <hr />
 </div>`;
 
   document
@@ -94,16 +101,18 @@ export function updateExperienceHtml() {
   let experienceDivHtml = `      <div class="experience-details" ">
   <label for="employer-name">Company Name</label>
   <br />
-  <input type="text" id="employer-name" class="employer-name-input" />
+  <input type="text" id="employer-name" class="employer-name-input"  placeholder="company name" />
   <br />
   <label for="occupation">Occupation</label>
   <br />
-  <input type="text" id="occupation" class="occupation-input" />
+  <input type="text" id="occupation" class="occupation-input" placeholder="occupation" />
+  <br>
   <label for="job-description">Brief Description</label>
   <br />
   <textarea
     id="job-description"
     class="job-description-input"
+    placeholder="Briefly tell us about your responsibilities, obligations, etc."
   ></textarea>
   <div class="experience-date-container">
     <div>
@@ -125,7 +134,8 @@ export function updateExperienceHtml() {
       />
     </div>
   </div>
-  <button class="remove-experience" >Remove Experience</button>
+  <button class="remove-experience" ><i class="fa-regular fa-trash-can"></i>Remove Experience</button>
+  <hr />
 </div>`;
   document
     .querySelector(".experience-main-container")
@@ -149,7 +159,10 @@ export function uploadPictureFnc(event) {
   const picFile = event.target;
 
   let img = picFile.result;
-  uploadedPicture.src = img;
+  document.querySelector(
+    ".uploaded-photo-container"
+  ).innerHTML = `  <img class="uploaded-photo" alt="photo" src=${img} />`;
+  // uploadedPicture.src = img;
   window.localStorage.setItem("image", JSON.stringify(img));
 }
 
@@ -174,6 +187,7 @@ export function updateSkillsHtml() {
   <div class="skills-container" >
   <div class="skill">
     <label for="skill-name">Skill</label>
+    <br>
     <input
       type="text"
       id="skill-name"
@@ -182,8 +196,9 @@ export function updateSkillsHtml() {
   </div>
   <div class="level-container">
     <label for="level-label">Level</label>
+    <br>
     <select id="level-label" class="level-select">
-      <option data-option-id="0">Enter Level</option>
+      <option data-option-id="0" selected>Enter Level</option>
       <option data-option-id="1">beginner</option>
       <option data-option-id="2">intermediate</option>
       <option data-option-id="3">skillfull</option>
@@ -191,7 +206,8 @@ export function updateSkillsHtml() {
       <option data-option-id="5">Professional</option>
     </select>
   </div>
-  <button class="remove-Skill">Remove Skill</button>
+  <button class="remove-Skill"><i class="fa-regular fa-trash-can"></i>Remove Skill</button>
+  <hr />
 </div>`;
   document
     .querySelector(".skills-main-container")

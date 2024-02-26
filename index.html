@@ -15,67 +15,92 @@
     <main>
       <form id="form">
         <div class="personal-information-main">
-          <h3 style="border: 1px solid red">Personal Information</h3>
+          <h3>Personal Information</h3>
           <div class="personal-information">
-            <div class="personal-details" style="border: 1px solid blue">
+            <div class="personal-details">
               <label for="name" class="name-label">Full name</label>
               <br />
               <input
                 type="text"
                 id="name"
                 class="name-input"
-                placeholder="full name"
+                placeholder="full name "
               />
               <br />
               <label for="desired-job">Applying for</label>
+
               <br />
               <input
                 type="text"
                 id="desired-job"
                 class="desired-job-input"
-                placeholder="desired-job"
+                placeholder="desired-job "
               />
               <label for="about-me"> About Me </label>
               <br />
-              <textarea class="about-me-input" id="about-me"></textarea>
+              <textarea
+                class="about-me-input"
+                id="about-me"
+                placeholder="Tell us something about you"
+              ></textarea>
               <br />
               <label for="address">Address</label>
               <br />
-              <input type="text" class="address-input" id="address" />
+              <input
+                type="text"
+                class="address-input"
+                id="address"
+                placeholder="address"
+              />
               <div class="contact-container">
                 <p>Contact Information</p>
                 <label for="phone">Phone #</label>
                 <br />
-                <input type="text" class="phone-input" id="phone" />
+                <input
+                  type="text"
+                  class="phone-input"
+                  id="phone"
+                  placeholder="phone number"
+                />
                 <br />
                 <label for="email">Email</label>
                 <br />
-                <input type="email" class="email-input" id="email" />
+                <input
+                  type="email"
+                  class="email-input"
+                  id="email"
+                  placeholder="email"
+                />
               </div>
             </div>
-            <div class="uploaded-photo-container">
-              <img class="uploaded-photo" alt="photo" src=" " />
-            </div>
+            <div class="uploaded-photo-container"></div>
           </div>
           <div class="photo-container">
             <label for="photo" class="photo-label">Upload Photo</label>
             <input type="file" id="photo" accept="image/*" />
-            <p class="no-photo">
-              Without Photo
-              <input type="checkbox" class="photo-btn" />
-            </p>
           </div>
         </div>
+        <hr />
         <div class="education-main-container">
-          <h3>Education</h3>
+          <h3 class="title">Education</h3>
           <div class="education" id="0">
             <label for="university">School/College/University</label>
             <br />
-            <input type="text" id="university" class="university-input" />
+            <input
+              type="text"
+              id="university"
+              class="university-input"
+              placeholder="school/college/University"
+            />
             <br />
             <label for="specialty">Specialty</label>
             <br />
-            <input type="text" id="specialty" class="specialty-input" />
+            <input
+              type="text"
+              id="specialty"
+              class="specialty-input"
+              placeholder="specialty"
+            />
             <div class="date-container">
               <div>
                 <label for="start-date">Started...</label>
@@ -88,26 +113,43 @@
                 <input type="date" id="finish-date" class="finish-date-input" />
               </div>
             </div>
-            <button class="education-btn">Remove</button>
+            <button class="education-btn">
+              <i class="fa-regular fa-trash-can"></i>Remove
+            </button>
+            <hr />
           </div>
         </div>
-        <button class="add-education">Add More Education</button>
+        <button class="add-education">
+          <i class="fa-solid fa-plus"></i>Add More Education
+        </button>
         <!-- experience section -->
         <div class="experience-main-container">
-          <h3>Experience</h3>
+          <h3 class="title">Experience</h3>
           <div class="experience-details">
             <label for="employer-name">Company Name</label>
             <br />
-            <input type="text" id="employer-name" class="employer-name-input" />
+            <input
+              type="text"
+              id="employer-name"
+              class="employer-name-input"
+              placeholder="company name"
+            />
             <br />
             <label for="occupation">Occupation</label>
             <br />
-            <input type="text" id="occupation" class="occupation-input" />
+            <input
+              type="text"
+              id="occupation"
+              class="occupation-input"
+              placeholder="occupation"
+            />
+            <br />
             <label for="job-description">Brief Description</label>
             <br />
             <textarea
               id="job-description"
               class="job-description-input"
+              placeholder="Briefly tell us about your responsibilities, obligations, etc."
             ></textarea>
             <div class="experience-date-container">
               <div>
@@ -129,25 +171,49 @@
                 />
               </div>
             </div>
-            <button class="remove-experience">Remove Experience</button>
+            <button class="remove-experience">
+              <i class="fa-regular fa-trash-can"></i>Remove Experience
+            </button>
+            <hr />
           </div>
         </div>
-        <button class="add-experience">Add more experience</button>
+        <button class="add-experience">
+          <i class="fa-solid fa-plus"></i>Add more experience
+        </button>
         <div class="references-main-container">
-          <h3>References</h3>
+          <h3 class="title">References</h3>
           <div class="reference">
-            <label for="reference-name"> Reference Name </label>
-            <input type="text" placeholder="ref. name" id="reference-name" />
-            <label for="reference-email"> email </label>
-            <input type="email" placeholder="ref.email" id="reference-email" />
-            <button class="remove-reference">Remove Reference</button>
+            <label for="reference-name"> Referent's Name </label>
+            <br />
+            <input
+              type="text"
+              placeholder="Referent's Name"
+              id="reference-name"
+            />
+            <br />
+            <label for="reference-email"> Contact Information </label>
+            <br />
+            <input
+              type="email"
+              placeholder="email, phone number, etc."
+              id="reference-email"
+            />
+            <br />
+            <button class="remove-reference">
+              <i class="fa-regular fa-trash-can"></i>Remove Reference
+            </button>
+            <hr />
           </div>
         </div>
-        <button class="add-reference">Add more reference</button>
+        <button class="add-reference">
+          <i class="fa-solid fa-plus"></i>Add more reference
+        </button>
         <div class="skills-main-container">
           <div class="skills-container">
+            <h3 class="title">Skills</h3>
             <div class="skill">
               <label for="skill-name">Skill</label>
+              <br />
               <input
                 type="text"
                 id="skill-name"
@@ -156,23 +222,32 @@
             </div>
             <div class="level-container">
               <label for="level-label">Level</label>
+              <br />
               <select id="level-label" class="level-select">
-                <option data-option-id="0">Enter Level</option>
-                <option data-option-id="1">beginner</option>
-                <option data-option-id="2">intermediate</option>
-                <option data-option-id="3">skillfull</option>
-                <option data-option-id="4">experienced</option>
+                <option data-option-id="0" selected>Enter Level</option>
+                <option data-option-id="1">Beginner</option>
+                <option data-option-id="2">Intermediate</option>
+                <option data-option-id="3">Skilful</option>
+                <option data-option-id="4">Experienced</option>
                 <option data-option-id="5">Professional</option>
               </select>
             </div>
-            <button class="remove-Skill">Remove Skill</button>
+            <button class="remove-Skill">
+              <i class="fa-regular fa-trash-can"></i>Remove Skill
+            </button>
+            <hr />
           </div>
         </div>
-        <button class="add-skill">Add more skill</button>
+        <button class="add-skill">
+          <i class="fa-solid fa-plus"></i>Add more skill
+        </button>
       </form>
     </main>
     <footer></footer>
-    <script src="https://cdn.jsdelivr.net/npm/uuid@3.4.0/dist/umd/uuidv4.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/5dc4c20cc7.js"
+      crossorigin="anonymous"
+    ></script>
 
     <script src="./script.js" type="module"></script>
   </body>
