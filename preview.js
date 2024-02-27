@@ -86,3 +86,34 @@ references.forEach((element) => {
     <hr class="hr"/>`
   );
 });
+
+// testing download functionality
+
+let btn = document.querySelector(".print");
+//
+
+window.jsPDF = window.jspdf.jsPDF;
+let docPDF = new jsPDF();
+console.log(docPDF);
+
+function downloadPDF(invoiceNo) {
+  let elementHTML = document.querySelector("main");
+  elementHTML.style.width = "100%";
+  docPDF.html(elementHTML, {
+    callback: function (docPDF) {
+      docPDF.save(invoiceNo + ".pdf");
+    },
+    x: 5,
+    y: 5,
+    width: 160,
+    windowWidth: 480,
+    autoPaging: true,
+  });
+  setTimeout(() => {
+    elementHTML.style.width = "60%";
+  }, 500);
+}
+
+btn.addEventListener("click", () => {
+  downloadPDF("123");
+});
