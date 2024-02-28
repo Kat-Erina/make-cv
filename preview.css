@@ -11,8 +11,9 @@ body {
 }
 main {
   width: 100%;
-  text-wrap: wrap;
+  word-wrap: wrap;
   padding-left: 1rem;
+  background-color: #d4e4ee;
 }
 .personal-information-preview {
   display: flex;
@@ -83,6 +84,9 @@ Education */ .education,
 .dates {
   font-size: 0.9rem;
 }
+.job-description {
+  width: 100%;
+}
 
 .university-name::before {
   content: " * ";
@@ -95,18 +99,10 @@ Education */ .education,
   color: rgb(1, 1, 1);
   font-weight: bold;
 }
-.skill-name::before {
-  content: " * ";
-  color: rgb(1, 1, 1);
-  font-weight: bold;
-}
+
 .skills-division span {
   margin-left: 2rem;
   font-weight: bold;
-}
-
-i {
-  color: rgb(159, 159, 12);
 }
 
 .refenerence-name-span,
@@ -118,6 +114,22 @@ i {
   margin-top: 0.6rem;
   margin-bottom: 0.6rem;
 }
+
+.print {
+  display: inline-block;
+  padding: 10px 10px;
+  padding-top: 10px;
+  background-color: #3498db;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  align-items: center;
+  text-align: center;
+  border: none;
+  margin-bottom: 0.8rem;
+  margin-top: 0.8rem;
+}
+
 @media screen and (min-width: 1000px) {
   main {
     width: 60%;
