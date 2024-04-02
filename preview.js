@@ -1,4 +1,5 @@
 let person = JSON.parse(localStorage.getItem("person")) || "";
+console.log(person);
 
 let education = JSON.parse(localStorage.getItem("education")) || "";
 let experience = JSON.parse(localStorage.getItem("experience-details")) || "";

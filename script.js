@@ -15,15 +15,7 @@ import {
   personObject,
 } from "./functions.js";
 
-const personObj = JSON.parse(localStorage.getItem("person")) || {
-  nameInput: "",
-  address: "",
-  about: "",
-  phone: "",
-  email: "",
-  photo: "",
-  desiredJob: "",
-};
+const personObj = JSON.parse(localStorage.getItem("person")) || {};
 
 // DOM Elements for EducationSection
 

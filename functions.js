@@ -48,7 +48,7 @@ export const personObject = {
   uploadedPicture: document.querySelector(".uploaded-photo"),
   uploadedPictureContainer: document.querySelector(".uploaded-photo-container"),
 };
-
+// localStorage.clear();
 export const array = [
   personObject.nameInput,
   personObject.phone,
